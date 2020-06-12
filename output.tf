@@ -3,5 +3,5 @@ output "vpc" {
 }
 
 output "transit_gateway" {
-    value = aviatrix_transit_gateway.default
+    value = var.ha_gw ? aviatrix_transit_gateway.ha : aviatrix_transit_gateway.single
 }
