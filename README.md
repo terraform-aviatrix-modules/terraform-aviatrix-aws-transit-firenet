@@ -2,7 +2,8 @@
 
 This module deploys a VPC and an Aviatrix transit gateway. Defining the Aviatrix Terraform provider is assumed upstream and is not part of this module.
 
-![diagram](images/module-aviatrix-transit-vpc-for-aws.png)
+<img src="images/module-aviatrix-transit-vpc-for-aws.png"  height="250">
+
 
 The following variables are required:
 
@@ -29,4 +30,4 @@ transit_gateway | The created Aviatrix transit gateway as an object with all of 
 
 When ha_gw is set to true, the deployed infrastructure will look like this:
 
-![diagram](images/module-aviatrix-transit-vpc-for-aws-ha.png)
+<img src="images/module-aviatrix-transit-vpc-for-aws-ha.png"  height="250">
