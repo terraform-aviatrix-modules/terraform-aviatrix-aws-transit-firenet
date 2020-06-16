@@ -19,7 +19,7 @@ resource "aviatrix_transit_gateway" "single" {
   gw_size            = var.instance_size
   vpc_id             = aviatrix_vpc.default.vpc_id
   account_name       = var.aws_account_name
-  subnet             = cidrsubnet(var.cidr, 12, 5)
+  subnet             = aviatrix_vpc.default.subnets[5].cidr
   connected_transit  = true
   tag_list = [
     "Auto-StartStop-Enabled:",
@@ -36,8 +36,8 @@ resource "aviatrix_transit_gateway" "ha" {
   gw_size            = var.instance_size
   vpc_id             = aviatrix_vpc.default.vpc_id
   account_name       = var.aws_account_name
-  subnet             = cidrsubnet(var.cidr, 12, 5)
-  ha_subnet          = cidrsubnet(var.cidr, 12, 6)
+  subnet             = aviatrix_vpc.default.subnets[5].cidr
+  ha_subnet          = aviatrix_vpc.default.subnets[7].cidr
   ha_gw_size         = var.instance_size
   connected_transit  = true
   tag_list = [
