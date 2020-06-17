@@ -11,7 +11,7 @@ key | value
 --- | ---
 region | AWS region to deploy the transit VPC in
 aws_account_name | The AWS accountname on the Aviatrix controller, under which the controller will deploy this VPC
-cidr | The IP CIDR wo be used to create the VPC. Assumes a /16.
+cidr | The IP CIDR wo be used to create the VPC.
 
 The following variables are optional:
 
