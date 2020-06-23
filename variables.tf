@@ -1,6 +1,5 @@
 variable "region" {
     type = string
-    default = "eu-west-1"
 }
 
 variable "cidr" {
@@ -19,4 +18,9 @@ variable "instance_size" {
 variable "ha_gw" {
     type = bool
     default = false
+}
+
+variable "attached" {
+    type = bool
+    default = true
 }

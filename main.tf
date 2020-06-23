@@ -5,7 +5,7 @@ resource "aviatrix_vpc" "default" {
   region               = var.region
   cidr                 = var.cidr
   account_name         = var.aws_account_name
-  aviatrix_firenet_vpc = false
+  aviatrix_firenet_vpc = true
   aviatrix_transit_vpc = true
 }
 
