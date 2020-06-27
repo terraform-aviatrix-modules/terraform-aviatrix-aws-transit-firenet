@@ -1,36 +1,36 @@
 variable "region" {
-    type = string
+  type = string
 }
 
 variable "cidr" {
-    type = string
+  type = string
 }
 
 variable "aws_account_name" {
-    type = string
+  type = string
 }
 
 variable "instance_size" {
-    type = string
-    default = "c5.xlarge"
+  type    = string
+  default = "c5.xlarge"
 }
 
 variable "fw_instance_size" {
-    type = string
-    default = "c5.xlarge"
+  type    = string
+  default = "c5.xlarge"
 }
 
 variable "ha_gw" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 
 variable "attached" {
-    type = bool
-    default = true
+  type    = bool
+  default = true
 }
 
 variable "firewall_image" {
-    type = string
-    default = "Fortinet FortiGate Next-Generation Firewall"
+  type    = string
+  default = "Fortinet FortiGate Next-Generation Firewall"
 }
