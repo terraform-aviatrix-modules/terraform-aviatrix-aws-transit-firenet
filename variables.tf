@@ -12,7 +12,12 @@ variable "aws_account_name" {
 
 variable "instance_size" {
     type = string
-    default = "t2.micro"
+    default = "c5.xlarge"
+}
+
+variable "fw_instance_size" {
+    type = string
+    default = "c5.xlarge"
 }
 
 variable "ha_gw" {
@@ -23,4 +28,9 @@ variable "ha_gw" {
 variable "attached" {
     type = bool
     default = true
+}
+
+variable "firewall_image" {
+    type = string
+    default = "Fortinet FortiGate Next-Generation Firewall"
 }

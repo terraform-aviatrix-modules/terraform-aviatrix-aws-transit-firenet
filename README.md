@@ -17,7 +17,8 @@ The following variables are optional:
 
 key | default | value
 --- | --- | ---
-instance_size | t2.micro | Size of the transit gateway instances
+instance_size | c5.xlarge | Size of the transit gateway instances
+fw_instance_size | c5.xlarge | Size of the firewall instances
 ha_gw | false | Set to true to enable deploying an HA GW
 fw_count | 1 | The amount of firewall instances to deploy per AZ (xN on diagram)
 attached | true | Attach firewall instances to Aviatrix Gateways
