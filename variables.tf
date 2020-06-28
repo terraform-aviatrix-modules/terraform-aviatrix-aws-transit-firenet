@@ -22,7 +22,7 @@ variable "fw_instance_size" {
 
 variable "ha_gw" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "attached" {
