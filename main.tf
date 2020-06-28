@@ -111,7 +111,7 @@ resource "aviatrix_firenet" "firenet_ha" {
   inspection_enabled = true
   egress_enabled     = true
   firewall_instance_association {
-    firenet_gw_name      = aviatrix_transit_gateway.single[0].gw_name
+    firenet_gw_name      = aviatrix_transit_gateway.ha[0].gw_name
     instance_id          = aviatrix_firewall_instance.firewall_instance_1[0].instance_id
     vendor_type          = "Generic"
     firewall_name        = aviatrix_firewall_instance.firewall_instance_1[0].firewall_name
@@ -121,7 +121,7 @@ resource "aviatrix_firenet" "firenet_ha" {
     attached             = var.attached
   }
   firewall_instance_association {
-    firenet_gw_name      = aviatrix_transit_gateway.single[0].gw_name
+    firenet_gw_name      = aviatrix_transit_gateway.ha[0].gw_name
     instance_id          = aviatrix_firewall_instance.firewall_instance_2[0].instance_id
     vendor_type          = "Generic"
     firewall_name        = aviatrix_firewall_instance.firewall_instance_2[0].firewall_name
