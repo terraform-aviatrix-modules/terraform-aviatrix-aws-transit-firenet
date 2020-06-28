@@ -47,6 +47,7 @@ resource "aviatrix_transit_gateway" "ha" {
   ]
 }
 
+#Firewall instances
 resource "aviatrix_firewall_instance" "firewall_instance" {
   count                 = var.ha_gw ? 0 : 1
   firewall_name         = "fw1-${var.region}"
@@ -86,7 +87,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   management_subnet     = aviatrix_vpc.default.subnets[3].cidr
 }
 
-
+#Firenet
 resource "aviatrix_firenet" "firenet" {
   count              = var.ha_gw ? 0 : 1
   vpc_id             = aviatrix_vpc.default.vpc_id

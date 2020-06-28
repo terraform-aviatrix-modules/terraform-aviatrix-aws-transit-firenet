@@ -32,5 +32,4 @@ variable "attached" {
 
 variable "firewall_image" {
   type    = string
-  default = "Fortinet FortiGate Next-Generation Firewall"
 }
