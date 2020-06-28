@@ -81,7 +81,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   vpc_id                = aviatrix_vpc.default.vpc_id
   firewall_image        = var.firewall_image
   egress_subnet         = aviatrix_vpc.default.subnets[3].cidr
-  firenet_gw_name       = "${aviatrix_transit_gateway.ha[0].gw_name}-HAGW"
+  firenet_gw_name       = "${aviatrix_transit_gateway.ha[0].gw_name}-hagw"
   iam_role              = null
   bootstrap_bucket_name = null
   management_subnet     = aviatrix_vpc.default.subnets[3].cidr
