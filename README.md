@@ -13,7 +13,7 @@ with ha_gw set to false, the following will be deployed:
 ### Usage Example
 ```
 module "transit_firenet_1" {
-  source  = "<path>"
+  source  = "https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet"
   version = "0.0.15"
 
   cidr = "10.1.0.0/20"
