@@ -65,3 +65,5 @@ key | description
 :--- | :---
 vpc | The created VPC as an object with all of it's attributes. This was created using the aviatrix_vpc resource.
 transit_gateway | The created Aviatrix transit gateway as an object with all of it's attributes.
+aviatrix_firenet | The created Aviatrix firenet object with all of it's attributes.
+aviatrix_firewall_instance | A list of the created firewall instances and their attributes.
