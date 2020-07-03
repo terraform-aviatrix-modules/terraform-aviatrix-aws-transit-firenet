@@ -4,7 +4,7 @@
 This module deploys a VPC, Aviatrix transit gateways and firewall instances. Defining the Aviatrix Terraform provider is assumed upstream and is not part of this module.
 
 ### Diagram
-<img src="images/module-aviatrix-transit-firenet-vpc-for-aws-fortinet-ha.png"  height="250">
+<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet.png"  height="250">
 
 with ha_gw set to false, the following will be deployed:
 
