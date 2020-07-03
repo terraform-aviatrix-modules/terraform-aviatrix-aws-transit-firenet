@@ -47,7 +47,7 @@ Fortinet FortiGate Next-Generation Firewall
 Fortinet FortiGate (BYOL) Next-Generation Firewall
 ```
 
-Make sure you are subscribed to the used image in the AWS Marketplace
+Make sure you are subscribed to the used image in the AWS Marketplace.
 
 The following variables are optional:
 
