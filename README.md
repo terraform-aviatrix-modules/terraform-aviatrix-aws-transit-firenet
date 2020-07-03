@@ -8,7 +8,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances. Def
 
 with ha_gw set to false, the following will be deployed:
 
-<img src="images/module-aviatrix-transit-firenet-vpc-for-aws-fortinet.png"  height="250">
+<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet-non-ha.png"  height="250">
 
 ### Variables
 The following variables are required:
@@ -42,7 +42,7 @@ key | default | value
 :--- | :--- | :---
 instance_size | c5.xlarge | Size of the transit gateway instances
 fw_instance_size | c5.xlarge | Size of the firewall instances
-ha_gw | true | Set to false to disable deploying an HA GW and FW instance
+ha_gw | true | Set to false to deploy single Aviatrix gateway and NGFW instance
 attached | true | Attach firewall instances to Aviatrix Gateways
 
 ### Outputs
