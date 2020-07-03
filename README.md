@@ -14,7 +14,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "<path>"
-  version = "0.0.9"
+  version = "0.0.15"
 
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
