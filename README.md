@@ -1,4 +1,4 @@
-# Module Aviatrix Transit Firenet VPC for AWS
+# Aviatrix Transit Firenet VPC for AWS
 
 ### Description
 This module deploys a VPC, Aviatrix transit gateways and firewall instances. Defining the Aviatrix Terraform provider is assumed upstream and is not part of this module.
@@ -9,6 +9,19 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances. Def
 with ha_gw set to false, the following will be deployed:
 
 <img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet-non-ha.png"  height="250">
+
+### Usage Example
+```
+module "transit_firenet_1" {
+  source  = "<path>"
+  version = "0.0.9"
+
+  cidr = "10.1.0.0/20"
+  region = "eu-west-1"
+  aws_account_name = "AWS"
+  firewall_image = "Fortinet FortiGate (BYOL) Next-Generation Firewall"
+}
+```
 
 ### Variables
 The following variables are required:
