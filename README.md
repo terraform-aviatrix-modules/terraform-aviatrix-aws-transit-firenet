@@ -1,7 +1,7 @@
 # Aviatrix Transit Firenet VPC for AWS
 
 ### Description
-This module deploys a VPC, Aviatrix transit gateways and firewall instances. Defining the Aviatrix Terraform provider is assumed upstream and is not part of this module.
+This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 
 ### Diagram
 <img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet.png"  height="250">
