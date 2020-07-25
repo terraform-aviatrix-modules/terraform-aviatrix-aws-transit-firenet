@@ -55,8 +55,8 @@ key | default | value
 :--- | :--- | :---
 instance_size | c5.xlarge | Size of the transit gateway instances
 fw_instance_size | c5.xlarge | Size of the firewall instances
-fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. When set to 2 or higher, ha_gw must be true.
-ha_gw | true | Set to false to deploy single Aviatrix gateway
+fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even.
+ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 attached | true | Attach firewall instances to Aviatrix Gateways
 
 ### Outputs
