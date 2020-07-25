@@ -110,25 +110,29 @@ resource "aviatrix_firenet" "firenet_ha" {
   dynamic firewall_instance_association {
     for_each = aviatrix_firewall_instance.firewall_instance_1
 
-    firenet_gw_name      = aviatrix_transit_gateway.ha[0].gw_name
-    instance_id          = firewall_instance_association.value.instance_id
-    vendor_type          = "Generic"
-    firewall_name        = firewall_instance_association.value.firewall_name
-    lan_interface        = firewall_instance_association.value.lan_interface
-    management_interface = null
-    egress_interface     = firewall_instance_association.value.egress_interface
-    attached             = var.attached
+    content {
+      firenet_gw_name      = aviatrix_transit_gateway.ha[0].gw_name
+      instance_id          = firewall_instance_association.value.instance_id
+      vendor_type          = "Generic"
+      firewall_name        = firewall_instance_association.value.firewall_name
+      lan_interface        = firewall_instance_association.value.lan_interface
+      management_interface = null
+      egress_interface     = firewall_instance_association.value.egress_interface
+      attached             = var.attached
+    }
   }
   dynamic firewall_instance_association {
     for_each = aviatrix_firewall_instance.firewall_instance_2
-    
-    firenet_gw_name      = "${aviatrix_transit_gateway.ha[0].gw_name}-hagw"
-    instance_id          = firewall_instance_association.value.instance_id
-    vendor_type          = "Generic"
-    firewall_name        = firewall_instance_association.value.firewall_name
-    lan_interface        = firewall_instance_association.value.lan_interface
-    management_interface = null
-    egress_interface     = firewall_instance_association.value.egress_interface
-    attached             = var.attached
+  
+    content {
+      firenet_gw_name      = "${aviatrix_transit_gateway.ha[0].gw_name}-hagw"
+      instance_id          = firewall_instance_association.value.instance_id
+      vendor_type          = "Generic"
+      firewall_name        = firewall_instance_association.value.firewall_name
+      lan_interface        = firewall_instance_association.value.lan_interface
+      management_interface = null
+      egress_interface     = firewall_instance_association.value.egress_interface
+      attached             = var.attached
+    }
   }
 }
