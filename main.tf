@@ -57,7 +57,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
   count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = "fw-az1-${count.index}-${var.region}"
+  firewall_name         = "fw-az1-${count.index+1}-${var.region}"
   firewall_size         = var.fw_instance_size
   vpc_id                = aviatrix_vpc.default.vpc_id
   firewall_image        = var.firewall_image
@@ -70,7 +70,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
   count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = "fw-az2-${count.index}-${var.region}"
+  firewall_name         = "fw-az2-${count.index+1}-${var.region}"
   firewall_size         = var.fw_instance_size
   vpc_id                = aviatrix_vpc.default.vpc_id
   firewall_image        = var.firewall_image
