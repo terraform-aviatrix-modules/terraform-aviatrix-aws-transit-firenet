@@ -31,6 +31,12 @@ variable "ha_gw" {
   default = true
 }
 
+variable "fw_amount" {
+  description = "Integer that determines the amount of NGFW instances to launch"
+  type    = number
+  default = 2
+}
+
 variable "attached" {
   description = "Boolean to determine if the spawned firewall instances will be attached on creation"
   type    = bool
