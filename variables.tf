@@ -47,3 +47,20 @@ variable "firewall_image" {
   description = "The firewall image to be used to deploy the NGFW's"
   type    = string
 }
+
+variable "bootstrap_bucket_name" {
+  description = "The firewall bootstrap bucket name"
+  type    = string
+}
+
+variable "iam_role" {
+  description = "The IAM role for bootstrapping"
+  type    = string
+  default = null
+}
+
+variable "bootstrap_bucket_name" {
+  description = "The firewall bootstrap bucket name"
+  type    = string
+  default = null
+}
