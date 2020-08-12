@@ -48,11 +48,6 @@ variable "firewall_image" {
   type    = string
 }
 
-variable "bootstrap_bucket_name" {
-  description = "The firewall bootstrap bucket name"
-  type    = string
-}
-
 variable "iam_role" {
   description = "The IAM role for bootstrapping"
   type    = string
