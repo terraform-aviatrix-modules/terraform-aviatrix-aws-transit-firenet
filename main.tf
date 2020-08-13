@@ -50,8 +50,8 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   firewall_image        = var.firewall_image
   egress_subnet         = aviatrix_vpc.default.subnets[1].cidr
   firenet_gw_name       = aviatrix_transit_gateway.single[0].gw_name
-  iam_role              = null
-  bootstrap_bucket_name = null
+  iam_role              = var.iam_role
+  bootstrap_bucket_name = var.bootstrap_bucket_name
   management_subnet     = aviatrix_vpc.default.subnets[1].cidr
 }
 
@@ -63,8 +63,8 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   firewall_image        = var.firewall_image
   egress_subnet         = aviatrix_vpc.default.subnets[1].cidr
   firenet_gw_name       = aviatrix_transit_gateway.ha[0].gw_name
-  iam_role              = null
-  bootstrap_bucket_name = null
+  iam_role              = var.iam_role
+  bootstrap_bucket_name = var.bootstrap_bucket_name
   management_subnet     = aviatrix_vpc.default.subnets[1].cidr
 }
 
@@ -76,8 +76,8 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   firewall_image        = var.firewall_image
   egress_subnet         = aviatrix_vpc.default.subnets[3].cidr
   firenet_gw_name       = "${aviatrix_transit_gateway.ha[0].gw_name}-hagw"
-  iam_role              = null
-  bootstrap_bucket_name = null
+  iam_role              = var.iam_role
+  bootstrap_bucket_name = var.bootstrap_bucket_name
   management_subnet     = aviatrix_vpc.default.subnets[3].cidr
 }
 
