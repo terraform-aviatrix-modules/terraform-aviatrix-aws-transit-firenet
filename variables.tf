@@ -8,7 +8,7 @@ variable "cidr" {
   type = string
 }
 
-variable "aws_account_name" {
+variable "account" {
   description = "The AWS account name, as known by the Aviatrix controller"
   type = string
 }
@@ -58,4 +58,16 @@ variable "bootstrap_bucket_name" {
   description = "The firewall bootstrap bucket name"
   type    = string
   default = null
+}
+
+variable "inspection_enabled" {
+  description = ""
+  type    = bool
+  default = true
+}
+
+variable "egress_enabled" {
+  description = ""
+  type    = bool
+  default = true
 }

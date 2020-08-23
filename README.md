@@ -14,11 +14,11 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "1.0.0"
+  version = "1.0.1"
 
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
-  aws_account_name = "AWS"
+  account = "AWS"
   firewall_image = "Fortinet FortiGate (BYOL) Next-Generation Firewall"
 }
 ```
@@ -29,7 +29,7 @@ The following variables are required:
 key | value
 --- | ---
 region | AWS region to deploy the transit VPC in
-aws_account_name | The AWS accountname on the Aviatrix controller, under which the controller will deploy this VPC
+account | The AWS accountname on the Aviatrix controller, under which the controller will deploy this VPC
 cidr | The IP CIDR wo be used to create the VPC.
 firewall_image | String for the firewall image to use
 
@@ -53,11 +53,16 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
+name | avx-\<region\>-transit | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-transit.
 instance_size | c5.xlarge | Size of the transit gateway instances
 fw_instance_size | c5.xlarge | Size of the firewall instances
 fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 attached | true | Attach firewall instances to Aviatrix Gateways
+inspection_enabled | true | 
+egress_enabled | true | 
+iam_role | null | IAM Role used to access bootstrap bucket.
+bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config from.
 
 ### Outputs
 This module will return the following objects:
