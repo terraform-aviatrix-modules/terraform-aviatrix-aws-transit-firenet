@@ -57,7 +57,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
   count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = length(var.name) > 0 ? "avx-${var.name}-az1-fw${count.index+1}" : "avx-${var.region}-az1-fw${count.index+1}"
+  firewall_name         = length(var.name) > 0 ? "avx-${var.name}-az1-fw${count.index + 1}" : "avx-${var.region}-az1-fw${count.index + 1}"
   firewall_size         = var.fw_instance_size
   vpc_id                = aviatrix_vpc.default.vpc_id
   firewall_image        = var.firewall_image
@@ -70,7 +70,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
   count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = length(var.name) > 0 ? "avx-${var.name}-az2-fw${count.index+1}" : "avx-${var.region}-az2-fw${count.index+1}"
+  firewall_name         = length(var.name) > 0 ? "avx-${var.name}-az2-fw${count.index + 1}" : "avx-${var.region}-az2-fw${count.index + 1}"
   firewall_size         = var.fw_instance_size
   vpc_id                = aviatrix_vpc.default.vpc_id
   firewall_image        = var.firewall_image
@@ -89,7 +89,7 @@ resource "aviatrix_firenet" "firenet" {
   egress_enabled     = var.egress_enabled
 
 
-firewall_instance_association {
+  firewall_instance_association {
     firenet_gw_name      = aviatrix_transit_gateway.single[0].gw_name
     instance_id          = aviatrix_firewall_instance.firewall_instance[0].instance_id
     vendor_type          = "Generic"
@@ -123,7 +123,7 @@ resource "aviatrix_firenet" "firenet_ha" {
   }
   dynamic firewall_instance_association {
     for_each = aviatrix_firewall_instance.firewall_instance_2
-  
+
     content {
       firenet_gw_name      = "${aviatrix_transit_gateway.ha[0].gw_name}-hagw"
       instance_id          = firewall_instance_association.value.instance_id
