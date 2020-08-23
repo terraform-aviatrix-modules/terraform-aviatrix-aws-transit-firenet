@@ -13,6 +13,12 @@ variable "account" {
   type        = string
 }
 
+variable "name" {
+  description = "Optionally provide a custom name for VPC and Gateway resources."
+  type        = string
+  default     = ""
+}
+
 variable "instance_size" {
   description = "AWS Instance size for the Aviatrix gateways"
   type        = string
