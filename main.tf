@@ -19,9 +19,12 @@ resource "aviatrix_transit_gateway" "single" {
   gw_size                = var.instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   account_name           = var.account
-  subnet                 = aviatrix_vpc.default.subnets[0].cidr
+  subnet                 = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 10, 4) : aviatrix_vpc.default.subnets[0].cidr
   enable_transit_firenet = true
   connected_transit      = true
+  insane_mode            = var.insane_mode
+  insane_mode_az         = "${var.region}${var.az1}"
+  ha_insane_mode_az      = "${var.region}${var.az2}"
 }
 
 # HA Transit GW
@@ -34,11 +37,14 @@ resource "aviatrix_transit_gateway" "ha" {
   gw_size                = var.instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   account_name           = var.account
-  subnet                 = aviatrix_vpc.default.subnets[0].cidr
-  ha_subnet              = aviatrix_vpc.default.subnets[2].cidr
+  subnet                 = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 10, 4) : aviatrix_vpc.default.subnets[0].cidr
+  ha_subnet              = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 10, 8) : aviatrix_vpc.default.subnets[2].cidr
   enable_transit_firenet = true
   ha_gw_size             = var.instance_size
   connected_transit      = true
+  insane_mode            = var.insane_mode
+  insane_mode_az         = "${var.region}${var.az1}"
+  ha_insane_mode_az      = "${var.region}${var.az2}"
 }
 
 #Firewall instances
