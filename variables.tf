@@ -75,7 +75,7 @@ variable "inspection_enabled" {
 variable "egress_enabled" {
   description = ""
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "insane_mode" {
