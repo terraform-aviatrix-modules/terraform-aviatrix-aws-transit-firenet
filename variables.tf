@@ -92,3 +92,15 @@ variable "az2" {
   type    = string
   default = "b"
 }
+
+variable "connected_transit" {
+  description = ""
+  type        = bool
+  default     = true
+}
+
+variable "active_mesh" {
+  description = ""
+  type        = bool
+  default     = true
+}

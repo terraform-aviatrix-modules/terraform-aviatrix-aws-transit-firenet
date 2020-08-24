@@ -66,6 +66,8 @@ bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config 
 insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Used for insane mode only.
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Used for insane mode only.
+connected_transit | true |
+active_mesh | true |
 
 ### Outputs
 This module will return the following objects:
