@@ -60,7 +60,7 @@ fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed a
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 attached | true | Attach firewall instances to Aviatrix Gateways
 inspection_enabled | true | 
-egress_enabled | true | 
+egress_enabled | false | 
 iam_role | null | IAM Role used to access bootstrap bucket.
 bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config from.
 insane_mode | false | Set to true to enable insane mode encryption
