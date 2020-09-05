@@ -79,21 +79,21 @@ variable "egress_enabled" {
 }
 
 variable "insane_mode" {
-  description = "Set to true to enable Aviatrix high performance encryption."  
-  type    = bool
-  default = false
+  description = "Set to true to enable Aviatrix high performance encryption."
+  type        = bool
+  default     = false
 }
 
 variable "az1" {
-  description = "Concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode"  
-  type    = string
-  default = "a"
+  description = "Concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode"
+  type        = string
+  default     = "a"
 }
 
 variable "az2" {
   description = "Concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode"
-  type    = string
-  default = "b"
+  type        = string
+  default     = "b"
 }
 
 variable "connected_transit" {
