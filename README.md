@@ -3,18 +3,27 @@
 ### Description
 This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 
+### Compatibility
+Module version | Terraform version | Controller version | Terraform provider version
+:--- | :--- | :--- | :---
+v1.1.0 | 0.12 | |
+v1.0.2 | 0.12 | |
+v1.0.2 | 0.12 | |
+v1.0.1 | 0.12 | |
+v1.0.0 | 0.12 | |
+
 ### Diagram
-<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet.png"  height="250">
+<img src="https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet/blob/master/img/module-transit-firenet-ha.png?raw=true">
 
 with ha_gw set to false, the following will be deployed:
 
-<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet-non-ha.png"  height="250">
+<img src="https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet/blob/master/img/module-transit-firenet.png?raw=true">
 
 ### Usage Example
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "1.0.1"
+  version = "1.1.0"
 
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -66,8 +75,8 @@ bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config 
 insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Used for insane mode only.
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Used for insane mode only.
-connected_transit | true |
-active_mesh | true |
+connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
+active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
 
 ### Outputs
 This module will return the following objects:
