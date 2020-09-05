@@ -4,17 +4,17 @@
 This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 
 ### Diagram
-<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet.png"  height="250">
+<img src="https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet/blob/master/img/module-transit-firenet-ha.png?raw=true">
 
 with ha_gw set to false, the following will be deployed:
 
-<img src="https://dhagens-repository-images-public.s3.eu-central-1.amazonaws.com/terraform-aviatrix-aws-transit-firenet/module-transit-firenet-non-ha.png"  height="250">
+<img src="https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet/blob/master/img/module-transit-firenet.png?raw=true">
 
 ### Usage Example
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "1.0.1"
+  version = "1.1.0"
 
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
