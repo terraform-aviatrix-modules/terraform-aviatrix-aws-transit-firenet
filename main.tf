@@ -21,6 +21,7 @@ resource "aviatrix_transit_gateway" "single" {
   account_name           = var.account
   subnet                 = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 10, 4) : aviatrix_vpc.default.subnets[0].cidr
   enable_transit_firenet = true
+  enable_hybrid_connection = var.hybrid_connection
   connected_transit      = var.connected_transit
   insane_mode            = var.insane_mode
   insane_mode_az         = var.insane_mode ? "${var.region}${var.az1}" : ""
@@ -41,6 +42,7 @@ resource "aviatrix_transit_gateway" "ha" {
   enable_transit_firenet = true
   ha_gw_size             = var.instance_size
   connected_transit      = var.connected_transit
+  enable_hybrid_connection = var.hybrid_connection
   insane_mode            = var.insane_mode
   insane_mode_az         = var.insane_mode ? "${var.region}${var.az1}" : ""
   ha_insane_mode_az      = var.insane_mode ? "${var.region}${var.az2}" : ""
