@@ -102,6 +102,12 @@ variable "connected_transit" {
   default     = true
 }
 
+variable "hybrid_connection" {
+  description = "Set to true to prepare Aviatrix transit for TGW connection."
+  type        = bool
+  default     = false
+}
+
 variable "active_mesh" {
   description = "Set to false to disable active mesh."
   type        = bool
