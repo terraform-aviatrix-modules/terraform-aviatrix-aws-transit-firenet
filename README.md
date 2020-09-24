@@ -77,6 +77,8 @@ az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Used 
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Used for insane mode only.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
 hybrid_connection | false | Sign of readiness for TGW connection
+bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
+learned_cidr_approval | false | Switch to true to enable learned CIDR approval
 active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
 
 ### Outputs
