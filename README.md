@@ -80,6 +80,8 @@ hybrid_connection | false | Sign of readiness for TGW connection
 bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
 learned_cidr_approval | false | Switch to true to enable learned CIDR approval
 active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
+prefix | true | Boolean to enable prefix name with avx-
+suffix | true | Boolean to enable suffix name with -firenet
 
 ### Outputs
 This module will return the following objects:

@@ -19,6 +19,18 @@ variable "name" {
   default     = ""
 }
 
+variable "prefix" {
+  description = "Boolean to determine if name will be prepended with avx-"
+  type        = bool
+  default     = true
+}
+
+variable "suffix" {
+  description = "Boolean to determine if name will be appended with -spoke"
+  type        = bool
+  default     = true
+}
+
 variable "instance_size" {
   description = "AWS Instance size for the Aviatrix gateways"
   type        = string
@@ -124,4 +136,15 @@ variable "active_mesh" {
   description = "Set to false to disable active mesh."
   type        = bool
   default     = true
+}
+
+locals {
+  lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
+  prefix            = var.prefix ? "avx-" : ""
+  suffix            = var.suffix ? "-firenet" : ""
+  name              = "${local.prefix}${local.lower_name}${local.suffix}"
+  subnet            = var.insane_mode ? cidrsubnet(var.cidr, 3, 6) : aviatrix_vpc.default.subnets[0].cidr
+  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, 3, 7) : aviatrix_vpc.default.subnets[2].cidr
+  insane_mode_az    = var.insane_mode ? "${var.region}${var.az1}" : null
+  ha_insane_mode_az = var.insane_mode ? "${var.region}${var.az2}" : null
 }
