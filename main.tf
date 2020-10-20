@@ -29,6 +29,7 @@ resource "aviatrix_transit_gateway" "default" {
   insane_mode                      = var.insane_mode
   insane_mode_az                   = local.insane_mode_az
   ha_insane_mode_az                = var.ha_gw ? local.ha_insane_mode_az : null
+  enable_segmentation              = var.enable_segmentation
 }
 
 #Firewall instances

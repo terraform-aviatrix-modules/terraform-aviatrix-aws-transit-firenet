@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v2.0.0 | 0.12 | >=6.2 | >=0.2.17
 v1.1.0 | 0.12 | |
 v1.0.2 | 0.12 | |
 v1.0.2 | 0.12 | |
@@ -23,7 +24,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "1.1.0"
+  version = "2.0.0"
 
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -82,6 +83,7 @@ learned_cidr_approval | false | Switch to true to enable learned CIDR approval
 active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
 prefix | true | Boolean to enable prefix name with avx-
 suffix | true | Boolean to enable suffix name with -firenet
+enable_segmentation | false | Switch to true to enable transit segmentation
 
 ### Outputs
 This module will return the following objects:
