@@ -144,6 +144,12 @@ variable "enable_segmentation" {
   default     = false
 }
 
+variable "single_az_ha" {
+  description = "Set to true if Controller managed Gateway HA is desired"
+  type        = bool
+  default     = true
+}
+
 variable "single_ip_snat" {
   description = "Enable single_ip mode Source NAT for this container"
   type        = bool

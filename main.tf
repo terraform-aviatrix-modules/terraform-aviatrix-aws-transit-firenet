@@ -30,6 +30,7 @@ resource "aviatrix_transit_gateway" "default" {
   insane_mode_az                   = local.insane_mode_az
   ha_insane_mode_az                = var.ha_gw ? local.ha_insane_mode_az : null
   enable_segmentation              = var.enable_segmentation
+  single_az_ha                     = var.single_az_ha
   single_ip_snat                   = var.single_ip_snat
   enable_advertise_transit_cidr    = var.enable_advertise_transit_cidr
   bgp_polling_time                 = var.bgp_polling_time
