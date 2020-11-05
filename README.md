@@ -84,6 +84,7 @@ active_mesh | true | Set to false to disable Active Mesh mode for the transit ga
 prefix | true | Boolean to enable prefix name with avx-
 suffix | true | Boolean to enable suffix name with -firenet
 enable_segmentation | false | Switch to true to enable transit segmentation
+single_az_ha | true | Set to false if Controller managed Gateway HA is desired
 single_ip_snat | false | Enable single_ip mode Source NAT for this container
 enable_advertise_transit_cidr  | false | Switch to enable/disable advertise transit VPC network CIDR for a VGW connection
 bgp_polling_time  | 50 | BGP route polling time. Unit is in seconds
