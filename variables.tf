@@ -178,7 +178,7 @@ locals {
   lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix            = var.prefix ? "avx-" : ""
   suffix            = var.suffix ? "-firenet" : ""
-  is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0  #Check if fw image contains palo. Needs special handling for management_subnet (CP & Fortigate null)
+  is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
   name              = "${local.prefix}${local.lower_name}${local.suffix}"
   subnet            = var.insane_mode ? cidrsubnet(var.cidr, 3, 6) : aviatrix_vpc.default.subnets[0].cidr
   ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, 3, 7) : aviatrix_vpc.default.subnets[2].cidr
