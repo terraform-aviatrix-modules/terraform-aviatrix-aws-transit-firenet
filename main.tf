@@ -39,42 +39,45 @@ resource "aviatrix_transit_gateway" "default" {
 
 #Firewall instances
 resource "aviatrix_firewall_instance" "firewall_instance" {
-  count                 = var.ha_gw ? 0 : 1
-  firewall_name         = "${local.name}-fw"
-  firewall_size         = var.fw_instance_size
-  vpc_id                = aviatrix_vpc.default.vpc_id
-  firewall_image        = var.firewall_image
-  egress_subnet         = aviatrix_vpc.default.subnets[1].cidr
-  firenet_gw_name       = aviatrix_transit_gateway.default.gw_name
-  iam_role              = var.iam_role
-  bootstrap_bucket_name = var.bootstrap_bucket_name
-  management_subnet     = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
+  count                  = var.ha_gw ? 0 : 1
+  firewall_name          = "${local.name}-fw"
+  firewall_size          = var.fw_instance_size
+  vpc_id                 = aviatrix_vpc.default.vpc_id
+  firewall_image         = var.firewall_image
+  firewall_image_version = var.firewall_image_version
+  egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
+  firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
+  iam_role               = var.iam_role
+  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
-  count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = "${local.name}-az1-fw${count.index + 1}"
-  firewall_size         = var.fw_instance_size
-  vpc_id                = aviatrix_vpc.default.vpc_id
-  firewall_image        = var.firewall_image
-  egress_subnet         = aviatrix_vpc.default.subnets[1].cidr
-  firenet_gw_name       = aviatrix_transit_gateway.default.gw_name
-  iam_role              = var.iam_role
-  bootstrap_bucket_name = var.bootstrap_bucket_name
-  management_subnet     = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
+  count                  = var.ha_gw ? var.fw_amount / 2 : 0
+  firewall_name          = "${local.name}-az1-fw${count.index + 1}"
+  firewall_size          = var.fw_instance_size
+  vpc_id                 = aviatrix_vpc.default.vpc_id
+  firewall_image         = var.firewall_image
+  firewall_image_version = var.firewall_image_version
+  egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
+  firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
+  iam_role               = var.iam_role
+  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
-  count                 = var.ha_gw ? var.fw_amount / 2 : 0
-  firewall_name         = "${local.name}-az2-fw${count.index + 1}"
-  firewall_size         = var.fw_instance_size
-  vpc_id                = aviatrix_vpc.default.vpc_id
-  firewall_image        = var.firewall_image
-  egress_subnet         = aviatrix_vpc.default.subnets[3].cidr
-  firenet_gw_name       = "${aviatrix_transit_gateway.default.gw_name}-hagw"
-  iam_role              = var.iam_role
-  bootstrap_bucket_name = var.bootstrap_bucket_name
-  management_subnet     = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : ""
+  count                  = var.ha_gw ? var.fw_amount / 2 : 0
+  firewall_name          = "${local.name}-az2-fw${count.index + 1}"
+  firewall_size          = var.fw_instance_size
+  vpc_id                 = aviatrix_vpc.default.vpc_id
+  firewall_image         = var.firewall_image
+  firewall_image_version = var.firewall_image_version
+  egress_subnet          = aviatrix_vpc.default.subnets[3].cidr
+  firenet_gw_name        = "${aviatrix_transit_gateway.default.gw_name}-hagw"
+  iam_role               = var.iam_role
+  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : ""
 }
 
 #Firenet
@@ -103,7 +106,7 @@ resource "aviatrix_firenet" "firenet_ha" {
   inspection_enabled = var.inspection_enabled
   egress_enabled     = var.egress_enabled
 
-  dynamic firewall_instance_association {
+  dynamic "firewall_instance_association" {
     for_each = aviatrix_firewall_instance.firewall_instance_1
 
     content {
@@ -117,7 +120,7 @@ resource "aviatrix_firenet" "firenet_ha" {
       attached             = var.attached
     }
   }
-  dynamic firewall_instance_association {
+  dynamic "firewall_instance_association" {
     for_each = aviatrix_firewall_instance.firewall_instance_2
 
     content {
