@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v2.0.2 | 0.12, 0.13 | >=6.2 | >=0.2.17.1
 v2.0.1 | 0.12, 0.13 | >=6.2 | >=0.2.17.1
 v2.0.0 | 0.12 | >=6.2 | >=0.2.17
 v1.1.0 | 0.12 | |
@@ -25,7 +26,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "2.0.1"
+  version = "2.0.2"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -66,6 +67,7 @@ key | default | value
 :--- | :--- | :---
 name | avx-\<region\>-transit | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-transit.
 instance_size | c5.xlarge | Size of the transit gateway instances
+firewall_image_version | latest | The software version to be used to deploy the NGFW's
 fw_instance_size | c5.xlarge | Size of the firewall instances
 fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.

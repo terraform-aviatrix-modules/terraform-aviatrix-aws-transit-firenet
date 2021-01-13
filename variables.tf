@@ -66,6 +66,12 @@ variable "firewall_image" {
   type        = string
 }
 
+variable "firewall_image_version" {
+  description = "The software version to be used to deploy the NGFW's"
+  type        = string
+  default     = null
+}
+
 variable "iam_role" {
   description = "The IAM role for bootstrapping"
   type        = string
