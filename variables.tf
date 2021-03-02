@@ -91,9 +91,21 @@ variable "inspection_enabled" {
 }
 
 variable "egress_enabled" {
-  description = "Set to true to enable egress"
+  description = "Set to true to enable egress on FW instances"
   type        = bool
   default     = false
+}
+
+variable "enable_egress_transit_firenet" {
+  description = "Set to true to enable egress on transit gw"
+  type        = bool
+  default     = false
+}
+
+variable "local_as_number" {
+  description = "Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations."
+  type        = string
+  default     = ""
 }
 
 variable "insane_mode" {

@@ -10,7 +10,7 @@ output "transit_gateway" {
 
 output "aviatrix_firenet" {
   description = "The Aviatrix firenet object with all of it's attributes"
-  value       = var.ha_gw ? aviatrix_firenet.firenet_ha[0] : aviatrix_firenet.firenet[0]
+  value       = aviatrix_firenet.firenet
 }
 
 output "aviatrix_firewall_instance" {
