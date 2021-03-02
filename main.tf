@@ -88,6 +88,7 @@ resource "aviatrix_firenet" "firenet" {
   inspection_enabled                   = var.inspection_enabled
   egress_enabled                       = var.egress_enabled
   manage_firewall_instance_association = false
+  depends_on                           = [aviatrix_firewall_instance_association.firenet_instance1, aviatrix_firewall_instance_association.firenet_instance2, aviatrix_firewall_instance_association.firenet_instance]
 }
 
 resource "aviatrix_firewall_instance_association" "firenet_instance" {
