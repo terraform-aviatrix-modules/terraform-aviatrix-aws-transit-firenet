@@ -192,6 +192,12 @@ variable "bgp_ecmp" {
   default     = false
 }
 
+variable "enable_bgp_over_lan" {
+  description = "Enable BGp over LAN. Creates eth4 for integration with SDWAN for example"
+  type        = bool
+  default     = false
+}
+
 locals {
   lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix            = var.prefix ? "avx-" : ""
