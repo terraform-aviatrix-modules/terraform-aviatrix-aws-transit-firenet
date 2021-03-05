@@ -104,8 +104,8 @@ variable "enable_egress_transit_firenet" {
 
 variable "local_as_number" {
   description = "Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations."
-  type        = string
-  default     = ""
+  type        = number
+  default     = null
 }
 
 variable "insane_mode" {
