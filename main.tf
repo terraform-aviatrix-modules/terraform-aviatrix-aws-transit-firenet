@@ -88,6 +88,7 @@ resource "aviatrix_firenet" "firenet" {
   vpc_id                               = aviatrix_vpc.default.vpc_id
   inspection_enabled                   = var.inspection_enabled
   egress_enabled                       = var.egress_enabled
+  keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
   depends_on                           = [aviatrix_firewall_instance_association.firenet_instance1, aviatrix_firewall_instance_association.firenet_instance2, aviatrix_firewall_instance_association.firenet_instance]
 }

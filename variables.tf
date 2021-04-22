@@ -102,6 +102,12 @@ variable "enable_egress_transit_firenet" {
   default     = false
 }
 
+variable "keep_alive_via_lan_interface_enabled" {
+  description = "Enable Keep Alive via Firewall LAN Interface"
+  type        = bool
+  default     = false
+}
+
 variable "local_as_number" {
   description = "Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations."
   type        = number
