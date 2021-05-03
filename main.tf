@@ -94,7 +94,11 @@ resource "aviatrix_firenet" "firenet" {
   egress_enabled                       = var.egress_enabled
   keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
-  depends_on                           = [aviatrix_firewall_instance_association.firenet_instance1, aviatrix_firewall_instance_association.firenet_instance2, aviatrix_firewall_instance_association.firenet_instance]
+  depends_on = [
+    aviatrix_firewall_instance_association.firenet_instance1,
+    aviatrix_firewall_instance_association.firenet_instance2,
+    aviatrix_firewall_instance_association.firenet_instance
+  ]
 }
 
 resource "aviatrix_firewall_instance_association" "firenet_instance" {
