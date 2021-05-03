@@ -69,7 +69,7 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
-name | avx-\<region\>-transit | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-firenet.
+name | avx-\<region\>-firenet | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-firenet.
 instance_size | c5.xlarge | Size of the transit gateway instances
 firewall_image_version | latest | The software version to be used to deploy the NGFW's
 fw_instance_size | c5.xlarge | Size of the firewall instances
