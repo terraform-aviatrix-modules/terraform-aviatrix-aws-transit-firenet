@@ -216,6 +216,9 @@ locals {
   suffix            = var.suffix ? "-firenet" : ""
   is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
   name              = "${local.prefix}${local.lower_name}${local.suffix}"
+  cidrbits          = tonumber(split("/", var.cidr)[1])
+  newbits           = 26 - local.cidrbits
+  netnum            = pow(2, local.newbits)
   subnet            = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[2].cidr
   ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[3].cidr
   az1               = "${var.region}${var.az1}"
