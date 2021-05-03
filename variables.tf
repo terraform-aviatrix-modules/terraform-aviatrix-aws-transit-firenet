@@ -219,8 +219,8 @@ locals {
   cidrbits          = tonumber(split("/", var.cidr)[1])
   newbits           = 26 - local.cidrbits
   netnum            = pow(2, local.newbits)
-  subnet            = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[2].cidr
-  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[3].cidr
+  subnet            = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[0].cidr
+  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[2].cidr
   az1               = "${var.region}${var.az1}"
   az2               = "${var.region}${var.az2}"
   insane_mode_az    = var.insane_mode ? local.az1 : null
