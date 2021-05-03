@@ -199,7 +199,13 @@ variable "bgp_ecmp" {
 }
 
 variable "enable_bgp_over_lan" {
-  description = "Enable BGp over LAN. Creates eth4 for integration with SDWAN for example"
+  description = "Enable BGP over LAN. Creates eth4 for integration with SDWAN for example"
+  type        = bool
+  default     = false
+}
+
+variable "enable_native_gwlb" {
+  description = "Enable GWLB for NGFW integration"
   type        = bool
   default     = false
 }
@@ -210,8 +216,10 @@ locals {
   suffix            = var.suffix ? "-firenet" : ""
   is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
   name              = "${local.prefix}${local.lower_name}${local.suffix}"
-  subnet            = var.insane_mode ? cidrsubnet(var.cidr, 3, 6) : aviatrix_vpc.default.subnets[0].cidr
-  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, 3, 7) : aviatrix_vpc.default.subnets[2].cidr
-  insane_mode_az    = var.insane_mode ? "${var.region}${var.az1}" : null
-  ha_insane_mode_az = var.insane_mode ? "${var.region}${var.az2}" : null
+  subnet            = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[2].cidr
+  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[3].cidr
+  az1               = "${var.region}${var.az1}"
+  az2               = "${var.region}${var.az2}"
+  insane_mode_az    = var.insane_mode ? local.az1 : null
+  ha_insane_mode_az = var.insane_mode ? local.az2 : null
 }

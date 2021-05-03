@@ -81,8 +81,8 @@ egress_enabled | false |
 iam_role | null | IAM Role used to access bootstrap bucket.
 bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config from.
 insane_mode | false | Set to true to enable insane mode encryption
-az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Used for insane mode only.
-az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Used for insane mode only.
+az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
+az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
 hybrid_connection | false | Sign of readiness for TGW connection
 bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
@@ -92,14 +92,15 @@ prefix | true | Boolean to enable prefix name with avx-
 suffix | true | Boolean to enable suffix name with -firenet
 enable_segmentation | false | Switch to true to enable transit segmentation
 single_az_ha | true | Set to false if Controller managed Gateway HA is desired
-single_ip_snat | false | Enable single_ip mode Source NAT for this container
+single_ip_snat | false | Enable single_ip mode Source NAT for this gateway
 enable_advertise_transit_cidr  | false | Switch to enable/disable advertise transit VPC network CIDR for a VGW connection
 bgp_polling_time  | 50 | BGP route polling time. Unit is in seconds
 bgp_ecmp  | false | Enable Equal Cost Multi Path (ECMP) routing for the next hop
 local_as_number | | Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
-enable_bgp_over_lan | false | Enable BGp over LAN. Creates eth4 for integration with SDWAN for example
+enable_bgp_over_lan | false | Enable BGP over LAN. Creates eth4 for integration with SDWAN for example
 enable_egress_transit_firenet | false | Set to true to enable egress on transit gw
 keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
+enable_native_gwlb | false | enable AWS GWLB (Only supported with Palo Alto NGFW)
 
 ### Outputs
 This module will return the following objects:
