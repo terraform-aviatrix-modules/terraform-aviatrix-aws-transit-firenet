@@ -21,7 +21,7 @@ resource "aviatrix_transit_gateway" "default" {
   account_name                     = var.account
   subnet                           = local.subnet
   ha_subnet                        = var.ha_gw ? local.ha_subnet : null
-  enable_transit_firenet           = true
+  enable_transit_firenet           = var.enable_native_gwlb ? false : true
   ha_gw_size                       = var.ha_gw ? var.instance_size : null
   connected_transit                = var.connected_transit
   enable_hybrid_connection         = var.hybrid_connection
