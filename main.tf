@@ -50,11 +50,11 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   firewall_image         = var.firewall_image
   firewall_image_version = var.firewall_image_version
   egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
-  firenet_gw_name        = var.enable_native_gwlb ? null : aviatrix_transit_gateway.default.gw_name
+  firenet_gw_name        = var.use_gwlb ? null : aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
-  zone                   = var.enable_native_gwlb ? local.az1 : null
+  zone                   = var.use_gwlb ? local.az1 : null
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
@@ -65,11 +65,11 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   firewall_image         = var.firewall_image
   firewall_image_version = var.firewall_image_version
   egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
-  firenet_gw_name        = var.enable_native_gwlb ? null : aviatrix_transit_gateway.default.gw_name
+  firenet_gw_name        = var.use_gwlb ? null : aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
-  zone                   = var.enable_native_gwlb ? local.az1 : null
+  zone                   = var.use_gwlb ? local.az1 : null
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
@@ -80,11 +80,11 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   firewall_image         = var.firewall_image
   firewall_image_version = var.firewall_image_version
   egress_subnet          = aviatrix_vpc.default.subnets[3].cidr
-  firenet_gw_name        = var.enable_native_gwlb ? null : "${aviatrix_transit_gateway.default.gw_name}-hagw"
+  firenet_gw_name        = var.use_gwlb ? null : "${aviatrix_transit_gateway.default.gw_name}-hagw"
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
-  zone                   = var.enable_native_gwlb ? local.az2 : null
+  zone                   = var.use_gwlb ? local.az2 : null
 }
 
 #Firenet
