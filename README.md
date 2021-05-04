@@ -95,7 +95,7 @@ local_as_number | | Changes the Aviatrix Transit Gateway ASN number before you s
 enable_bgp_over_lan | false | Enable BGP over LAN. Creates eth4 for integration with SDWAN for example
 enable_egress_transit_firenet | false | Set to true to enable egress on transit gw
 keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
-enable_native_gwlb | false | enable AWS GWLB (Only supported with Palo Alto NGFW)
+use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
 
 ### Outputs
 This module will return the following objects:

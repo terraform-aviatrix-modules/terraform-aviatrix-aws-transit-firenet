@@ -7,7 +7,6 @@ resource "aviatrix_vpc" "default" {
   account_name         = var.account
   aviatrix_firenet_vpc = true
   aviatrix_transit_vpc = false
-  enable_native_gwlb   = var.enable_native_gwlb
 }
 
 #Transit GW
@@ -39,7 +38,7 @@ resource "aviatrix_transit_gateway" "default" {
   local_as_number                  = var.local_as_number
   enable_egress_transit_firenet    = var.enable_egress_transit_firenet
   enable_bgp_over_lan              = var.enable_bgp_over_lan
-  enable_gateway_load_balancer     = var.enable_native_gwlb
+  enable_gateway_load_balancer     = var.use_gwlb
 }
 
 #Firewall instances

@@ -204,8 +204,8 @@ variable "enable_bgp_over_lan" {
   default     = false
 }
 
-variable "enable_native_gwlb" {
-  description = "Enable GWLB for NGFW integration"
+variable "use_gwlb" {
+  description = "Use AWS GWLB for NGFW integration"
   type        = bool
   default     = false
 }
