@@ -7,7 +7,7 @@ resource "aviatrix_vpc" "default" {
   account_name         = var.account
   aviatrix_firenet_vpc = true
   aviatrix_transit_vpc = false
-  #enable_native_gwlb   = var.enable_native_gwlb
+  enable_native_gwlb   = var.enable_native_gwlb
 }
 
 #Transit GW
