@@ -38,7 +38,9 @@ resource "aviatrix_transit_gateway" "default" {
   local_as_number                  = var.local_as_number
   enable_egress_transit_firenet    = var.enable_egress_transit_firenet
   enable_bgp_over_lan              = var.enable_bgp_over_lan
+  enable_gateway_load_balancer     = var.use_gwlb
   enable_encrypt_volume            = var.enable_encrypt_volume
+  customer_managed_keys            = var.customer_managed_keys
 }
 
 #Firewall instances
@@ -53,7 +55,8 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
-  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
+  zone                   = var.use_gwlb ? local.az1 : null
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
@@ -67,7 +70,8 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
-  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : ""
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
+  zone                   = var.use_gwlb ? local.az1 : null
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
@@ -81,7 +85,8 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   firenet_gw_name        = "${aviatrix_transit_gateway.default.gw_name}-hagw"
   iam_role               = var.iam_role
   bootstrap_bucket_name  = var.bootstrap_bucket_name
-  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : ""
+  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
+  zone                   = var.use_gwlb ? local.az2 : null
 }
 
 #Firenet
@@ -91,7 +96,11 @@ resource "aviatrix_firenet" "firenet" {
   egress_enabled                       = var.egress_enabled
   keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
-  depends_on                           = [aviatrix_firewall_instance_association.firenet_instance1, aviatrix_firewall_instance_association.firenet_instance2, aviatrix_firewall_instance_association.firenet_instance]
+  depends_on = [
+    aviatrix_firewall_instance_association.firenet_instance1,
+    aviatrix_firewall_instance_association.firenet_instance2,
+    aviatrix_firewall_instance_association.firenet_instance
+  ]
 }
 
 resource "aviatrix_firewall_instance_association" "firenet_instance" {

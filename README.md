@@ -6,18 +6,13 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v3.0.4 | 0.13 | >=6.3 | >=0.2.18
 v3.0.3 | 0.13 | >=6.3 | >=0.2.18
 v3.0.2 | 0.13 | >=6.3 | >=0.2.18
 v3.0.1 | 0.13 | >=6.3 | >=0.2.18
 v3.0.0 | 0.13 | >=6.2 | >=0.2.17.2
-v2.0.2 | 0.12 | >=6.2 | >=0.2.17.1
-v2.0.1 | 0.12 | >=6.2 | >=0.2.17.1
-v2.0.0 | 0.12 | >=6.2 | >=0.2.17
-v1.1.0 | 0.12 | |
-v1.0.2 | 0.12 | |
-v1.0.2 | 0.12 | |
-v1.0.1 | 0.12 | |
-v1.0.0 | 0.12 | |
+
+**_Information on older releases can be found in respective release notes._*
 
 ### Diagram
 <img src="https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-transit-firenet/blob/master/img/module-transit-firenet-ha.png?raw=true">
@@ -69,7 +64,7 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
-name | avx-\<region\>-transit | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-transit.
+name | avx-\<region\>-firenet | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-firenet.
 instance_size | c5.xlarge | Size of the transit gateway instances
 firewall_image_version | latest | The software version to be used to deploy the NGFW's
 fw_instance_size | c5.xlarge | Size of the firewall instances
@@ -81,8 +76,8 @@ egress_enabled | false |
 iam_role | null | IAM Role used to access bootstrap bucket.
 bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config from.
 insane_mode | false | Set to true to enable insane mode encryption
-az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Used for insane mode only.
-az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Used for insane mode only.
+az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
+az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
 hybrid_connection | false | Sign of readiness for TGW connection
 bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
@@ -92,14 +87,17 @@ prefix | true | Boolean to enable prefix name with avx-
 suffix | true | Boolean to enable suffix name with -firenet
 enable_segmentation | false | Switch to true to enable transit segmentation
 single_az_ha | true | Set to false if Controller managed Gateway HA is desired
-single_ip_snat | false | Enable single_ip mode Source NAT for this container
+single_ip_snat | false | Enable single_ip mode Source NAT for this gateway
 enable_advertise_transit_cidr  | false | Switch to enable/disable advertise transit VPC network CIDR for a VGW connection
 bgp_polling_time  | 50 | BGP route polling time. Unit is in seconds
 bgp_ecmp  | false | Enable Equal Cost Multi Path (ECMP) routing for the next hop
 local_as_number | | Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
-enable_bgp_over_lan | false | Enable BGp over LAN. Creates eth4 for integration with SDWAN for example
+enable_bgp_over_lan | false | Enable BGP over LAN. Creates eth4 for integration with SDWAN for example
 enable_egress_transit_firenet | false | Set to true to enable egress on transit gw
 keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
+use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
+enable_encrypt_volume | false | Set to true to enable EBS volume encryption for Gateway.
+customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
 
 ### Outputs
 This module will return the following objects:
