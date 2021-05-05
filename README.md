@@ -96,6 +96,8 @@ enable_bgp_over_lan | false | Enable BGP over LAN. Creates eth4 for integration 
 enable_egress_transit_firenet | false | Set to true to enable egress on transit gw
 keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
 use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
+enable_encrypt_volume | false | Set to true to enable EBS volume encryption for Gateway.
+customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
 
 ### Outputs
 This module will return the following objects:

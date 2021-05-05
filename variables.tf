@@ -210,6 +210,18 @@ variable "use_gwlb" {
   default     = false
 }
 
+variable "enable_encrypt_volume" {
+  description = "Enable EBS volume encryption for Gateway. Only supports AWS and AWSGOV. Valid values: true, false. Default value: false."
+  type        = bool
+  default     = false
+}
+
+variable "customer_managed_keys" {
+  description = "Customer managed key ID for EBS Volume encryption."
+  type        = string
+  default     = null
+}
+
 locals {
   lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix            = var.prefix ? "avx-" : ""

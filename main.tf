@@ -39,6 +39,8 @@ resource "aviatrix_transit_gateway" "default" {
   enable_egress_transit_firenet    = var.enable_egress_transit_firenet
   enable_bgp_over_lan              = var.enable_bgp_over_lan
   enable_gateway_load_balancer     = var.use_gwlb
+  enable_encrypt_volume            = var.enable_encrypt_volume
+  customer_managed_keys            = var.customer_managed_keys
 }
 
 #Firewall instances
