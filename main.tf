@@ -38,6 +38,7 @@ resource "aviatrix_transit_gateway" "default" {
   local_as_number                  = var.local_as_number
   enable_egress_transit_firenet    = var.enable_egress_transit_firenet
   enable_bgp_over_lan              = var.enable_bgp_over_lan
+  enable_encrypt_volume            = var.enable_encrypt_volume
 }
 
 #Firewall instances
