@@ -25,7 +25,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "3.0.3"
+  version = "3.0.4"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
