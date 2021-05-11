@@ -15,7 +15,7 @@ output "aviatrix_firenet" {
 
 output "aviatrix_firewall_instance" {
   description = "A list with the created firewall instances and their attributes"
-  value       = var.ha_gw ? [aviatrix_firewall_instance.firewall_instance_1[0], aviatrix_firewall_instance.firewall_instance_2[0]] : [aviatrix_firewall_instance.firewall_instance[0]]
+  value       = var.ha_gw ? ( local.is_aviatrix ? [aviatrix_gateway.egress_instance_1[0],aviatrix_gateway.egress_instance_2[0]] : [aviatrix_firewall_instance.firewall_instance_1[0], aviatrix_firewall_instance.firewall_instance_2[0]]) : ( local.is_aviatrix ? [aviatrix_gateway.egress_instance_1[0]] : [aviatrix_firewall_instance.firewall_instance[0]])
 }
 
 
