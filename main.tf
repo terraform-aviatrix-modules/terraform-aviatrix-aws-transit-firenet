@@ -147,7 +147,7 @@ resource "aviatrix_firewall_instance_association" "firenet_instance" {
   count                = var.ha_gw ? 0 : 1
   vpc_id               = aviatrix_vpc.default.vpc_id
   firenet_gw_name      = aviatrix_transit_gateway.default.gw_name
-  instance_id          = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance[0].instance_id
+  instance_id          = local.is_aviatrix ? aviatrix_gateway.egress_instance[0].gw_name : aviatrix_firewall_instance.firewall_instance[0].instance_id
   firewall_name        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance[0].firewall_name
   lan_interface        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance[0].lan_interface
   management_interface = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance[0].management_interface
@@ -160,7 +160,7 @@ resource "aviatrix_firewall_instance_association" "firenet_instance1" {
   count                = var.ha_gw ? var.fw_amount / 2 : 0
   vpc_id               = aviatrix_vpc.default.vpc_id
   firenet_gw_name      = aviatrix_transit_gateway.default.gw_name
-  instance_id          = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_1[count.index].instance_id
+  instance_id          = local.is_aviatrix ? aviatrix_gateway.egress_instance_1[count.index].gw_name : aviatrix_firewall_instance.firewall_instance_1[count.index].instance_id
   firewall_name        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_1[count.index].firewall_name
   lan_interface        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_1[count.index].lan_interface
   management_interface = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_1[count.index].management_interface
@@ -173,7 +173,7 @@ resource "aviatrix_firewall_instance_association" "firenet_instance2" {
   count                = var.ha_gw ? var.fw_amount / 2 : 0
   vpc_id               = aviatrix_vpc.default.vpc_id
   firenet_gw_name      = aviatrix_transit_gateway.default.ha_gw_name
-  instance_id          = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_2[count.index].instance_id
+  instance_id          = local.is_aviatrix ? aviatrix_gateway.egress_instance_2[count.index].gw_name : aviatrix_firewall_instance.firewall_instance_2[count.index].instance_id
   firewall_name        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_2[count.index].firewall_name
   lan_interface        = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_2[count.index].lan_interface
   management_interface = local.is_aviatrix ? null : aviatrix_firewall_instance.firewall_instance_2[count.index].management_interface
