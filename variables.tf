@@ -93,7 +93,7 @@ variable "inspection_enabled" {
 variable "egress_enabled" {
   description = "Set to true to enable egress on FW instances"
   type        = bool
-  default     = ""
+  default     = false
 }
 
 variable "enable_egress_transit_firenet" {
@@ -238,5 +238,4 @@ locals {
   az2               = "${var.region}${var.az2}"
   insane_mode_az    = var.insane_mode ? local.az1 : null
   ha_insane_mode_az = var.insane_mode ? local.az2 : null
-  egress_enable     = var.egress_enabled ? var.egress_enabled : (local.is_aviatrix ? true : false) #Default to true for Aviatrix FQDN egress, unless overriden by input variable
 }
