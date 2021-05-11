@@ -226,7 +226,7 @@ locals {
   lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix            = var.prefix ? "avx-" : ""
   suffix            = var.suffix ? "-firenet" : ""
-  is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
+  is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0     #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
   is_aviatrix       = length(regexall("aviatrix", lower(var.firewall_image))) > 0 #Check if fw image is Aviatrix FQDN Egress
   name              = "${local.prefix}${local.lower_name}${local.suffix}"
   cidrbits          = tonumber(split("/", var.cidr)[1])
