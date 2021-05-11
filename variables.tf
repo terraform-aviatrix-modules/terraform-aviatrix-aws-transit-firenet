@@ -93,7 +93,7 @@ variable "inspection_enabled" {
 variable "egress_enabled" {
   description = "Set to true to enable egress on FW instances"
   type        = bool
-  default     = false
+  default     = ""
 }
 
 variable "enable_egress_transit_firenet" {
@@ -227,6 +227,7 @@ locals {
   prefix            = var.prefix ? "avx-" : ""
   suffix            = var.suffix ? "-firenet" : ""
   is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
+  is_aviatrix       = length(regexall("aviatrix", lower(var.firewall_image))) > 0 #Check if fw image is Aviatrix FQDN Egress
   name              = "${local.prefix}${local.lower_name}${local.suffix}"
   cidrbits          = tonumber(split("/", var.cidr)[1])
   newbits           = 26 - local.cidrbits
@@ -237,4 +238,5 @@ locals {
   az2               = "${var.region}${var.az2}"
   insane_mode_az    = var.insane_mode ? local.az1 : null
   ha_insane_mode_az = var.insane_mode ? local.az2 : null
+  egress_enable     = var.egress_enabled ? var.egress_enabled : (local.is_aviatrix ? true : false) #Default to true for Aviatrix FQDN egress, unless overriden by input variable
 }

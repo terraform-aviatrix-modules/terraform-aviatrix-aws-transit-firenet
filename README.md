@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v3.0.5 | 0.13 | >=6.3 | >=0.2.18
 v3.0.4 | 0.13 | >=6.3 | >=0.2.18
 v3.0.3 | 0.13 | >=6.3 | >=0.2.18
 v3.0.2 | 0.13 | >=6.3 | >=0.2.18
@@ -25,7 +26,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "3.0.4"
+  version = "3.0.5"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -56,6 +57,7 @@ Check Point CloudGuard IaaS Next-Gen Firewall with Threat Prevention
 Check Point CloudGuard IaaS All-In-One
 Fortinet FortiGate Next-Generation Firewall
 Fortinet FortiGate (BYOL) Next-Generation Firewall
+Aviatrix FQDN Egress Filtering
 ```
 
 Make sure you are subscribed to the used image in the AWS Marketplace.
