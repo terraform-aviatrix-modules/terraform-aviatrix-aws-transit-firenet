@@ -87,7 +87,7 @@ variable "bootstrap_bucket_name_1" {
 variable "bootstrap_bucket_name_2" {
   description = "The firewall bootstrap bucket name for the odd firewalls (2,4,6 etc)"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "inspection_enabled" {
