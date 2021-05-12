@@ -244,5 +244,5 @@ locals {
   az2                     = "${var.region}${var.az2}"
   insane_mode_az          = var.insane_mode ? local.az1 : null
   ha_insane_mode_az       = var.insane_mode ? local.az2 : null
-  bootstrap_bucket_name_2 = var.bootstrap_bucket_name_2 ? var.bootstrap_bucket_name_2 : var.bootstrap_bucket_name_1 #If bucket 2 name is not provided, fallback to bucket 1.
+  bootstrap_bucket_name_2 = length(var.bootstrap_bucket_name_2) > 0 ? var.bootstrap_bucket_name_2 : var.bootstrap_bucket_name_1 #If bucket 2 name is not provided, fallback to bucket 1.
 }
