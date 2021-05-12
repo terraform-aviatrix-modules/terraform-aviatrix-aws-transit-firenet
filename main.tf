@@ -54,7 +54,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
   firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
-  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  bootstrap_bucket_name  = var.bootstrap_bucket_name_1
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
 }
@@ -69,7 +69,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
   firenet_gw_name        = aviatrix_transit_gateway.default.gw_name
   iam_role               = var.iam_role
-  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  bootstrap_bucket_name  = var.bootstrap_bucket_name_1
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
 }
@@ -84,7 +84,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   egress_subnet          = aviatrix_vpc.default.subnets[3].cidr
   firenet_gw_name        = aviatrix_transit_gateway.default.ha_gw_name
   iam_role               = var.iam_role
-  bootstrap_bucket_name  = var.bootstrap_bucket_name
+  bootstrap_bucket_name  = local.bootstrap_bucket_name_2
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
   zone                   = var.use_gwlb ? local.az2 : null
 }
