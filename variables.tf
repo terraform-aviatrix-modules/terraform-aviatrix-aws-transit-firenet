@@ -72,10 +72,16 @@ variable "firewall_image_version" {
   default     = null
 }
 
-variable "iam_role" {
+variable "iam_role_1" {
   description = "The IAM role for bootstrapping"
   type        = string
   default     = null
+}
+
+variable "iam_role_2" {
+  description = "The IAM role for bootstrapping"
+  type        = string
+  default     = ""
 }
 
 variable "bootstrap_bucket_name_1" {
@@ -245,4 +251,5 @@ locals {
   insane_mode_az          = var.insane_mode ? local.az1 : null
   ha_insane_mode_az       = var.insane_mode ? local.az2 : null
   bootstrap_bucket_name_2 = length(var.bootstrap_bucket_name_2) > 0 ? var.bootstrap_bucket_name_2 : var.bootstrap_bucket_name_1 #If bucket 2 name is not provided, fallback to bucket 1.
+  iam_role_2              = length(var.iam_role_2) > 0 ? var.iam_role_2 : var.iam_role_1                                        #If IAM role 2 name is not provided, fallback to IAM role 1.
 }

@@ -75,7 +75,8 @@ ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false
 attached | true | Attach firewall instances to Aviatrix Gateways.
 inspection_enabled | true | Enable/disable east/west + north/south inspection via NGFW.
 egress_enabled | false | Enable/disable internet egress via NGFW.
-iam_role | null | IAM Role used to access bootstrap bucket.
+iam_role_1 | null | IAM Role used to access bootstrap bucket. (If iam_role_2 is not set, this will used for all NGFW instances)
+iam_role_2 | null | IAM Role used to access bootstrap bucket. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall config from. (If bootstrap_bucket_name_2 is not set, this will used for all NGFW instances)
 bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 insane_mode | false | Set to true to enable insane mode encryption
