@@ -41,6 +41,9 @@ resource "aviatrix_transit_gateway" "default" {
   enable_gateway_load_balancer     = var.use_gwlb
   enable_encrypt_volume            = var.enable_encrypt_volume
   customer_managed_keys            = var.customer_managed_keys
+  tunnel_detection_time            = var.tunnel_detection_time
+  tags                             = var.tags
+  enable_multi_tier_transit        = var.enable_multi_tier_transit
 }
 
 #Firewall instances
@@ -57,6 +60,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   bootstrap_bucket_name  = var.bootstrap_bucket_name_1
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
+  firewall_image_id      = var.firewall_image_id
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
@@ -72,6 +76,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   bootstrap_bucket_name  = var.bootstrap_bucket_name_1
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
+  firewall_image_id      = var.firewall_image_id
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
@@ -87,6 +92,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   bootstrap_bucket_name  = local.bootstrap_bucket_name_2
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
   zone                   = var.use_gwlb ? local.az2 : null
+  firewall_image_id      = var.firewall_image_id
 }
 
 #FQDN Egress filtering instances
@@ -133,6 +139,7 @@ resource "aviatrix_firenet" "firenet" {
   egress_enabled                       = local.is_aviatrix ? true : var.egress_enabled      #Always switch to true if Aviatrix FQDN egress.
   keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
+  egress_static_cidrs                  = var.egress_static_cidrs
   depends_on = [
     aviatrix_firewall_instance_association.firenet_instance1,
     aviatrix_firewall_instance_association.firenet_instance2,

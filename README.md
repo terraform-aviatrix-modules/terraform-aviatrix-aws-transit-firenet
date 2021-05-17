@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v4.0.0 | 0.13 + 0.14 | >=6.4 | >=0.2.19
 v3.0.5 | 0.13 | >=6.3 | >=0.2.18
 v3.0.4 | 0.13 | >=6.3 | >=0.2.18
 v3.0.3 | 0.13 | >=6.3 | >=0.2.18
@@ -102,6 +103,11 @@ keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LA
 use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
 enable_encrypt_volume | false | Set to true to enable EBS volume encryption for Gateway.
 customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
+tunnel_detection_time | null | The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]. Default is 60.
+tags | null | Map of tags to assign to the gateway.
+enable_multi_tier_transit |	false |	Switch to enable multi tier transit
+egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
+firewall_image_id | | Custom Firewall image ID.
 
 ### Outputs
 This module will return the following objects:
