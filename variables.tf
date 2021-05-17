@@ -234,6 +234,36 @@ variable "customer_managed_keys" {
   default     = null
 }
 
+variable "tunnel_detection_time" {
+  description = "The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]."
+  type        = number
+  default     = null
+}
+
+variable "tags" {
+  description = "Map of tags to assign to the gateway."
+  type        = map(string)
+  default     = null
+}
+
+variable "enable_multi_tier_transit" {
+  description = "Set to true to enable multi tier transit."
+  type        = bool
+  default     = false
+}
+
+variable "egress_static_cidrs" {
+  description = "List of egress static CIDRs."
+  type        = list(string)
+  default     = []
+}
+
+variable "firewall_image_id" {
+  description = "Firewall image ID."
+  type        = string
+  default     = null
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""
