@@ -72,16 +72,28 @@ variable "firewall_image_version" {
   default     = null
 }
 
-variable "iam_role" {
+variable "iam_role_1" {
   description = "The IAM role for bootstrapping"
   type        = string
   default     = null
 }
 
-variable "bootstrap_bucket_name" {
-  description = "The firewall bootstrap bucket name"
+variable "iam_role_2" {
+  description = "The IAM role for bootstrapping"
+  type        = string
+  default     = ""
+}
+
+variable "bootstrap_bucket_name_1" {
+  description = "The firewall bootstrap bucket name for the odd firewalls (1,3,5 etc)"
   type        = string
   default     = null
+}
+
+variable "bootstrap_bucket_name_2" {
+  description = "The firewall bootstrap bucket name for the odd firewalls (2,4,6 etc)"
+  type        = string
+  default     = ""
 }
 
 variable "inspection_enabled" {
@@ -223,18 +235,21 @@ variable "customer_managed_keys" {
 }
 
 locals {
-  lower_name        = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
-  prefix            = var.prefix ? "avx-" : ""
-  suffix            = var.suffix ? "-firenet" : ""
-  is_palo           = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
-  name              = "${local.prefix}${local.lower_name}${local.suffix}"
-  cidrbits          = tonumber(split("/", var.cidr)[1])
-  newbits           = 26 - local.cidrbits
-  netnum            = pow(2, local.newbits)
-  subnet            = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[0].cidr
-  ha_subnet         = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[2].cidr
-  az1               = "${var.region}${var.az1}"
-  az2               = "${var.region}${var.az2}"
-  insane_mode_az    = var.insane_mode ? local.az1 : null
-  ha_insane_mode_az = var.insane_mode ? local.az2 : null
+  lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
+  prefix                  = var.prefix ? "avx-" : ""
+  suffix                  = var.suffix ? "-firenet" : ""
+  is_palo                 = length(regexall("palo", lower(var.firewall_image))) > 0     #Check if fw image is palo. Needs special handling for management_subnet (CP & Fortigate null)
+  is_aviatrix             = length(regexall("aviatrix", lower(var.firewall_image))) > 0 #Check if fw image is Aviatrix FQDN Egress
+  name                    = "${local.prefix}${local.lower_name}${local.suffix}"
+  cidrbits                = tonumber(split("/", var.cidr)[1])
+  newbits                 = 26 - local.cidrbits
+  netnum                  = pow(2, local.newbits)
+  subnet                  = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 2) : aviatrix_vpc.default.public_subnets[0].cidr
+  ha_subnet               = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[2].cidr
+  az1                     = "${var.region}${var.az1}"
+  az2                     = "${var.region}${var.az2}"
+  insane_mode_az          = var.insane_mode ? local.az1 : null
+  ha_insane_mode_az       = var.insane_mode ? local.az2 : null
+  bootstrap_bucket_name_2 = length(var.bootstrap_bucket_name_2) > 0 ? var.bootstrap_bucket_name_2 : var.bootstrap_bucket_name_1 #If bucket 2 name is not provided, fallback to bucket 1.
+  iam_role_2              = length(var.iam_role_2) > 0 ? var.iam_role_2 : var.iam_role_1                                        #If IAM role 2 name is not provided, fallback to IAM role 1.
 }

@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v3.0.5 | 0.13 | >=6.3 | >=0.2.18
 v3.0.4 | 0.13 | >=6.3 | >=0.2.18
 v3.0.3 | 0.13 | >=6.3 | >=0.2.18
 v3.0.2 | 0.13 | >=6.3 | >=0.2.18
@@ -25,7 +26,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "3.0.4"
+  version = "3.0.5"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -56,6 +57,7 @@ Check Point CloudGuard IaaS Next-Gen Firewall with Threat Prevention
 Check Point CloudGuard IaaS All-In-One
 Fortinet FortiGate Next-Generation Firewall
 Fortinet FortiGate (BYOL) Next-Generation Firewall
+Aviatrix FQDN Egress Filtering
 ```
 
 Make sure you are subscribed to the used image in the AWS Marketplace.
@@ -70,11 +72,13 @@ firewall_image_version | latest | The software version to be used to deploy the 
 fw_instance_size | c5.xlarge | Size of the firewall instances
 fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
-attached | true | Attach firewall instances to Aviatrix Gateways
-inspection_enabled | true | 
-egress_enabled | false | 
-iam_role | null | IAM Role used to access bootstrap bucket.
-bootstrap_bucket_name | null | Name of bootstrap bucket to pull firewall config from.
+attached | true | Attach firewall instances to Aviatrix Gateways.
+inspection_enabled | true | Enable/disable east/west + north/south inspection via NGFW.
+egress_enabled | false | Enable/disable internet egress via NGFW.
+iam_role_1 | null | IAM Role used to access bootstrap bucket. (If iam_role_2 is not set, this will used for all NGFW instances)
+iam_role_2 | null | IAM Role used to access bootstrap bucket. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
+bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall config from. (If bootstrap_bucket_name_2 is not set, this will used for all NGFW instances)
+bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB.
