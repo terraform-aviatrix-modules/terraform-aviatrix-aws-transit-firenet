@@ -272,7 +272,7 @@ locals {
   is_aviatrix             = length(regexall("aviatrix", lower(var.firewall_image))) > 0 #Check if fw image is Aviatrix FQDN Egress
   name                    = "${local.prefix}${local.lower_name}${local.suffix}"
   cidrbits                = tonumber(split("/", var.cidr)[1])
-  newbits                 = 26 - local.cidrbits
+  newbits                 = 25 - local.cidrbits
   netnum                  = pow(2, local.newbits)
   subnet                  = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[0].cidr
   ha_subnet               = var.insane_mode ? cidrsubnet(var.cidr, local.newbits, local.netnum - 1) : aviatrix_vpc.default.public_subnets[2].cidr
