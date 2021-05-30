@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v4.0.1 | 0.13 + 0.14 | >=6.4 | >=0.2.19
 v4.0.0 | 0.13 + 0.14 | >=6.4 | >=0.2.19
 v3.0.5 | 0.13 | >=6.3 | >=0.2.18
 v3.0.4 | 0.13 | >=6.3 | >=0.2.18
@@ -27,7 +28,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "3.0.5"
+  version = "4.0.1"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
