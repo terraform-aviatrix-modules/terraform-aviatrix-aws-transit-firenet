@@ -110,7 +110,6 @@ egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be
 firewall_image_id | | Custom Firewall image ID.
 learned_cidrs_approval_mode | | Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection
 
-
 ### Outputs
 This module will return the following objects:
 
