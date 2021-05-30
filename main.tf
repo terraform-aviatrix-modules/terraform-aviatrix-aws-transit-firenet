@@ -44,6 +44,7 @@ resource "aviatrix_transit_gateway" "default" {
   tunnel_detection_time            = var.tunnel_detection_time
   tags                             = var.tags
   enable_multi_tier_transit        = var.enable_multi_tier_transit
+  learned_cidrs_approval_mode      = var.learned_cidrs_approval_mode
 }
 
 #Firewall instances
