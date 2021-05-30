@@ -264,6 +264,12 @@ variable "firewall_image_id" {
   default     = null
 }
 
+variable "learned_cidrs_approval_mode" {
+  description = "Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection"
+  type        = string
+  default     = null
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""

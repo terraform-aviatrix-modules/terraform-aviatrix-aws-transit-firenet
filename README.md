@@ -108,6 +108,7 @@ tags | null | Map of tags to assign to the gateway.
 enable_multi_tier_transit |	false |	Switch to enable multi tier transit
 egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
 firewall_image_id | | Custom Firewall image ID.
+learned_cidrs_approval_mode | | Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection
 
 ### Outputs
 This module will return the following objects:

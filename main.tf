@@ -22,7 +22,7 @@ resource "aviatrix_transit_gateway" "default" {
   ha_subnet                        = var.ha_gw ? local.ha_subnet : null
   enable_transit_firenet           = true
   ha_gw_size                       = var.ha_gw ? var.instance_size : null
-  connected_transit                = var.connected_transit
+  connected_transit                = var.enable_egress_transit_firenet ? false : var.connected_transit
   enable_hybrid_connection         = var.hybrid_connection
   bgp_manual_spoke_advertise_cidrs = var.bgp_manual_spoke_advertise_cidrs
   enable_learned_cidrs_approval    = var.learned_cidr_approval
@@ -44,6 +44,7 @@ resource "aviatrix_transit_gateway" "default" {
   tunnel_detection_time            = var.tunnel_detection_time
   tags                             = var.tags
   enable_multi_tier_transit        = var.enable_multi_tier_transit
+  learned_cidrs_approval_mode      = var.learned_cidrs_approval_mode
 }
 
 #Firewall instances
