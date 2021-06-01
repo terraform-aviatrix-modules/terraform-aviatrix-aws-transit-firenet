@@ -137,7 +137,7 @@ resource "aviatrix_gateway" "egress_instance_2" {
 resource "aviatrix_firenet" "firenet" {
   vpc_id                               = aviatrix_vpc.default.vpc_id
   inspection_enabled                   = local.is_aviatrix || var.enable_egress_transit_firenet ? false : var.inspection_enabled #Always switch to false if Aviatrix FQDN egress or egress transit firenet.
-  egress_enabled                       = local.is_aviatrix ? true : var.egress_enabled                                                #Always switch to true if Aviatrix FQDN egress.
+  egress_enabled                       = local.is_aviatrix ? true : var.egress_enabled                                           #Always switch to true if Aviatrix FQDN egress.
   keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
   egress_static_cidrs                  = var.egress_static_cidrs
