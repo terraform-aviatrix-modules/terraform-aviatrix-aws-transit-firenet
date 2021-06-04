@@ -71,7 +71,7 @@ name | avx-\<region\>-firenet | Provide a custom name for VPC and Gateway resour
 instance_size | c5.xlarge | Size of the transit gateway instances
 firewall_image_version | latest | The software version to be used to deploy the NGFW's
 fw_instance_size | c5.xlarge | Size of the firewall instances
-fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even.
+fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even and only applies to when ha_gw enabled.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 attached | true | Attach firewall instances to Aviatrix Gateways.
 inspection_enabled | true | Enable/disable east/west + north/south inspection via NGFW.
