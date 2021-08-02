@@ -288,6 +288,12 @@ variable "user_data_1" {
   default     = null
 }
 
+variable "user_data_2" {
+  description = "User data for bootstrapping Fortigate and Checkpoint firewalls"
+  type        = string
+  default     = ""
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""
