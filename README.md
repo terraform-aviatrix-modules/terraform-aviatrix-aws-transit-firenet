@@ -110,6 +110,7 @@ gov | false | Set to true when deploying this module in AWS GOV
 fail_close_enabled | | Set to true to enable fail close
 user_data_1 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (If user_data_2 is not set, this will used for all NGFW instances)
 user_data_2 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
+east_west_inspection_excluded_cidrs | | Network List Excluded From East-West Inspection.
 
 ### Outputs
 This module will return the following objects:

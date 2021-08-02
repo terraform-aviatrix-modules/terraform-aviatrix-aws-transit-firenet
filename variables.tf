@@ -297,7 +297,7 @@ variable "user_data_2" {
 variable "east_west_inspection_excluded_cidrs" {
   description = "Network List Excluded From East-West Inspection."
   type        = string
-  default     = null
+  default     = ""
 }
 
 locals {
