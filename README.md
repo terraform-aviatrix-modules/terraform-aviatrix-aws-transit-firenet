@@ -109,6 +109,10 @@ enable_multi_tier_transit |	false |	Switch to enable multi tier transit
 egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
 firewall_image_id | | Custom Firewall image ID.
 learned_cidrs_approval_mode | | Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection
+gov | false | Set to true when deploying this module in AWS GOV
+fail_close_enabled | | Set to true to enable fail close
+user_data_1 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (If user_data_2 is not set, this will used for all NGFW instances)
+user_data_2 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 
 ### Outputs
 This module will return the following objects:

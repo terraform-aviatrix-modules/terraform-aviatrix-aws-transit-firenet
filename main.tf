@@ -1,6 +1,6 @@
 #Transit VPC
 resource "aviatrix_vpc" "default" {
-  cloud_type           = 1
+  cloud_type           = local.cloud_type
   name                 = local.name
   region               = var.region
   cidr                 = var.cidr
@@ -12,7 +12,7 @@ resource "aviatrix_vpc" "default" {
 #Transit GW
 resource "aviatrix_transit_gateway" "default" {
   enable_active_mesh               = var.active_mesh
-  cloud_type                       = 1
+  cloud_type                       = local.cloud_type
   vpc_reg                          = var.region
   gw_name                          = local.name
   gw_size                          = var.instance_size
@@ -62,6 +62,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
   firewall_image_id      = var.firewall_image_id
+  user_data              = var.user_data_1
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
@@ -78,6 +79,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[0].cidr : null
   zone                   = var.use_gwlb ? local.az1 : null
   firewall_image_id      = var.firewall_image_id
+  user_data              = var.user_data_1
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
@@ -94,6 +96,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
   zone                   = var.use_gwlb ? local.az2 : null
   firewall_image_id      = var.firewall_image_id
+  user_data              = local.user_data_2
 }
 
 #FQDN Egress filtering instances
@@ -141,6 +144,7 @@ resource "aviatrix_firenet" "firenet" {
   keep_alive_via_lan_interface_enabled = var.keep_alive_via_lan_interface_enabled
   manage_firewall_instance_association = false
   egress_static_cidrs                  = var.egress_static_cidrs
+  fail_close_enabled                   = var.fail_close_enabled
 
   depends_on = [
     aviatrix_firewall_instance_association.firenet_instance1,
