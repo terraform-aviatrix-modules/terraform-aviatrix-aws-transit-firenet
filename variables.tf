@@ -270,6 +270,24 @@ variable "learned_cidrs_approval_mode" {
   default     = null
 }
 
+variable "gov" {
+  description = "Set to true if deploying this module in AWS GOV."
+  type        = bool
+  default     = false
+}
+
+variable "fail_close_enabled" {
+  description = "Set to true to enable fail_close"
+  type        = bool
+  default     = null
+}
+
+variable "user_data_1" {
+  description = "User data for bootstrapping Fortigate and Checkpoint firewalls"
+  type        = string
+  default     = null
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""
@@ -288,4 +306,6 @@ locals {
   ha_insane_mode_az       = var.insane_mode ? local.az2 : null
   bootstrap_bucket_name_2 = length(var.bootstrap_bucket_name_2) > 0 ? var.bootstrap_bucket_name_2 : var.bootstrap_bucket_name_1 #If bucket 2 name is not provided, fallback to bucket 1.
   iam_role_2              = length(var.iam_role_2) > 0 ? var.iam_role_2 : var.iam_role_1                                        #If IAM role 2 name is not provided, fallback to IAM role 1.
+  cloud_type              = var.gov ? 256 : 1
+  user_data_2             = length(var.user_data_2) > 0 ? var.user_data_2 : var.user_data_1 #If user data 2 name is not provided, fallback to user data 1.
 }
