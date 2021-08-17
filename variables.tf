@@ -320,4 +320,5 @@ locals {
   iam_role_2              = length(var.iam_role_2) > 0 ? var.iam_role_2 : var.iam_role_1                                        #If IAM role 2 name is not provided, fallback to IAM role 1.
   cloud_type              = var.gov ? 256 : 1
   user_data_2             = length(var.user_data_2) > 0 ? var.user_data_2 : var.user_data_1 #If user data 2 name is not provided, fallback to user data 1.
+  single_az_mode          = var.az1 == var.az2 ? true : false                               #Single AZ mode is not related in HA. It is meant for corner case scenario's where customers want to deploy the entire firenet in 1 AZ for traffic cost saving.
 }

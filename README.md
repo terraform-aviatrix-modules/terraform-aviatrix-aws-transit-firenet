@@ -79,7 +79,7 @@ bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall confi
 bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
-az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB.
+az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB. If az1 and az2 are equal. Single AZ mode (deploy everyting in 1 AZ) is triggered.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
 hybrid_connection | false | Sign of readiness for TGW connection
 bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 

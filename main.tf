@@ -19,7 +19,7 @@ resource "aviatrix_transit_gateway" "default" {
   vpc_id                           = aviatrix_vpc.default.vpc_id
   account_name                     = var.account
   subnet                           = local.subnet
-  ha_subnet                        = var.ha_gw ? local.ha_subnet : null
+  ha_subnet                        = var.ha_gw ? (local.single_az_mode ? local.subnet : local.ha_subnet) : null
   enable_transit_firenet           = true
   ha_gw_size                       = var.ha_gw ? var.instance_size : null
   connected_transit                = var.enable_egress_transit_firenet ? false : var.connected_transit
@@ -89,11 +89,11 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
   firewall_image_version = var.firewall_image_version
-  egress_subnet          = aviatrix_vpc.default.subnets[3].cidr
+  egress_subnet          = local.single_az_mode ? aviatrix_vpc.default.subnets[1].cidr : aviatrix_vpc.default.subnets[3].cidr
   firenet_gw_name        = aviatrix_transit_gateway.default.ha_gw_name
   iam_role               = local.iam_role_2
   bootstrap_bucket_name  = local.bootstrap_bucket_name_2
-  management_subnet      = local.is_palo ? aviatrix_vpc.default.subnets[2].cidr : null
+  management_subnet      = local.is_palo ? (local.single_az_mode ? aviatrix_vpc.default.subnets[0].cidr : aviatrix_vpc.default.subnets[2].cidr) : null
   zone                   = var.use_gwlb ? local.az2 : null
   firewall_image_id      = var.firewall_image_id
   user_data              = local.user_data_2
@@ -132,7 +132,7 @@ resource "aviatrix_gateway" "egress_instance_2" {
   vpc_id       = aviatrix_vpc.default.vpc_id
   vpc_reg      = var.region
   gw_size      = var.fw_instance_size
-  subnet       = aviatrix_vpc.default.subnets[3].cidr
+  subnet       = local.single_az_mode ? aviatrix_vpc.default.subnets[1].cidr : aviatrix_vpc.default.subnets[3].cidr
   single_az_ha = var.single_az_ha
 }
 
