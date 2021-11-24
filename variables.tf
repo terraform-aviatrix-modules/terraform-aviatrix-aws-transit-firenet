@@ -246,6 +246,12 @@ variable "tags" {
   default     = null
 }
 
+variable "fw_tags" {
+  description = "Map of tags to assign to the firewall or FQDN egress gw's."
+  type        = map(string)
+  default     = null
+}
+
 variable "enable_multi_tier_transit" {
   description = "Set to true to enable multi tier transit."
   type        = bool

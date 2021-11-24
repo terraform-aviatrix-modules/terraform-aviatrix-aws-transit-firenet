@@ -103,6 +103,7 @@ enable_encrypt_volume | false | Set to true to enable EBS volume encryption for 
 customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
 tunnel_detection_time | null | The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]. Default is 60.
 tags | null | Map of tags to assign to the gateway.
+fw_tags | null | Map of tags to assign to the firewall or FQDN egress gw's.
 enable_multi_tier_transit |	false |	Switch to enable multi tier transit
 egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
 firewall_image_id | | Custom Firewall image ID.
