@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v5.0.0 | 0.13 - 1.x | >=6.5 | >=0.2.20.3
 v4.0.3 | 0.13 + 0.14 | >=6.4 | >=0.2.19.2
 v4.0.2 | 0.13 + 0.14 | >=6.4 | >=0.2.19
 v4.0.1 | 0.13 + 0.14 | >=6.4 | >=0.2.19
@@ -24,7 +25,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "4.0.3"
+  version = "5.0.0"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -79,7 +80,7 @@ bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall confi
 bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
-az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB.
+az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB. If az1 and az2 are equal. Single AZ mode (deploy everyting in 1 AZ) is triggered.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
 hybrid_connection | false | Sign of readiness for TGW connection
 bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
@@ -102,6 +103,7 @@ enable_encrypt_volume | false | Set to true to enable EBS volume encryption for 
 customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
 tunnel_detection_time | null | The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]. Default is 60.
 tags | null | Map of tags to assign to the gateway.
+fw_tags | null | Map of tags to assign to the firewall or FQDN egress gw's.
 enable_multi_tier_transit |	false |	Switch to enable multi tier transit
 egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
 firewall_image_id | | Custom Firewall image ID.
@@ -111,13 +113,14 @@ fail_close_enabled | | Set to true to enable fail close
 user_data_1 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (If user_data_2 is not set, this will used for all NGFW instances)
 user_data_2 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 east_west_inspection_excluded_cidrs | | Network List Excluded From East-West Inspection.
+china | false | Set to true if deploying this module in AWS/Azure China.
 
 ### Outputs
 This module will return the following objects:
 
 key | description
 :--- | :---
-vpc | The created VPC as an object with all of it's attributes. This was created using the aviatrix_vpc resource.
-transit_gateway | The created Aviatrix transit gateway as an object with all of it's attributes.
-aviatrix_firenet | The created Aviatrix firenet object with all of it's attributes.
-aviatrix_firewall_instance | A list of the created firewall instances and their attributes.
+[vpc](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/resources/aviatrix_vpc) | The created VPC as an object with all of it's attributes. This was created using the aviatrix_vpc resource.
+[transit_gateway](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/resources/aviatrix_transit_gateway) | The created Aviatrix transit gateway as an object with all of it's attributes.
+[aviatrix_firenet](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/resources/aviatrix_firenet) | The created Aviatrix firenet object with all of it's attributes.
+[aviatrix_firewall_instance](https://registry.terraform.io/providers/AviatrixSystems/aviatrix/latest/docs/resources/aviatrix_firewall_instance) | A list of the created firewall instances and their attributes.
