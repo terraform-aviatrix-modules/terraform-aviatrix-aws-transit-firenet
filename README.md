@@ -65,55 +65,55 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
-name | avx-\<region\>-firenet | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-firenet.
-instance_size | c5.xlarge | Size of the transit gateway instances
-firewall_image_version | latest | The software version to be used to deploy the NGFW's
-fw_instance_size | c5.xlarge | Size of the firewall instances
-fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even and only applies to when ha_gw enabled.
-ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
+active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
 attached | true | Attach firewall instances to Aviatrix Gateways.
-inspection_enabled | true | Enable/disable east/west + north/south inspection via NGFW.
-egress_enabled | false | Enable/disable internet egress via NGFW.
-iam_role_1 | null | IAM Role used to access bootstrap bucket. (If iam_role_2 is not set, this will used for all NGFW instances)
-iam_role_2 | null | IAM Role used to access bootstrap bucket. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
-bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall config from. (If bootstrap_bucket_name_2 is not set, this will used for all NGFW instances)
-bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
-insane_mode | false | Set to true to enable insane mode encryption
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB. If az1 and az2 are equal. Single AZ mode (deploy everyting in 1 AZ) is triggered.
-connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
-hybrid_connection | false | Sign of readiness for TGW connection
-bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
-learned_cidr_approval | false | Switch to true to enable learned CIDR approval
-active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
-prefix | true | Boolean to enable prefix name with avx-
-suffix | true | Boolean to enable suffix name with -firenet
-enable_segmentation | false | Switch to true to enable transit segmentation
-single_az_ha | true | Set to false if Controller managed Gateway HA is desired
-single_ip_snat | false | Enable single_ip mode Source NAT for this gateway
-enable_advertise_transit_cidr  | false | Switch to enable/disable advertise transit VPC network CIDR for a VGW connection
-bgp_polling_time  | 50 | BGP route polling time. Unit is in seconds
 bgp_ecmp  | false | Enable Equal Cost Multi Path (ECMP) routing for the next hop
-local_as_number | | Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+bgp_manual_spoke_advertise_cidrs | | Intended CIDR list to advertise via BGP. Example: "10.2.0.0/16,10.4.0.0/16" 
+bgp_polling_time  | 50 | BGP route polling time. Unit is in seconds
+bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall config from. (If bootstrap_bucket_name_2 is not set, this will used for all NGFW instances)
+bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
+china | false | Set to true if deploying this module in AWS/Azure China.
+connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
+customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
+east_west_inspection_excluded_cidrs | | Network List Excluded From East-West Inspection.
+egress_enabled | false | Enable/disable internet egress via NGFW.
+egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
+enable_advertise_transit_cidr  | false | Switch to enable/disable advertise transit VPC network CIDR for a VGW connection
 enable_bgp_over_lan | false | Enable BGP over LAN. Creates eth4 for integration with SDWAN for example
 enable_egress_transit_firenet | false | Set to true to enable egress on transit gw
-keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
-use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
 enable_encrypt_volume | false | Set to true to enable EBS volume encryption for Gateway.
-customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
-tunnel_detection_time | null | The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]. Default is 60.
-tags | null | Map of tags to assign to the gateway.
-fw_tags | null | Map of tags to assign to the firewall or FQDN egress gw's.
 enable_multi_tier_transit |	false |	Switch to enable multi tier transit
-egress_static_cidrs | [] | List of egress static CIDRs. Egress is required to be enabled. Example: ["1.171.15.184/32", "1.171.15.185/32"].
-firewall_image_id | | Custom Firewall image ID.
-learned_cidrs_approval_mode | | Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection
-gov | false | Set to true when deploying this module in AWS GOV
+enable_segmentation | false | Switch to true to enable transit segmentation
 fail_close_enabled | | Set to true to enable fail close
+firewall_image_id | | Custom Firewall image ID.
+firewall_image_version | latest | The software version to be used to deploy the NGFW's
+fw_amount | 2 | The amount of NGFW instances to deploy. These will be deployed accross multiple AZ's. Amount must be even and only applies to when ha_gw enabled.
+fw_instance_size | c5.xlarge | Size of the firewall instances
+fw_tags | null | Map of tags to assign to the firewall or FQDN egress gw's.
+gov | false | Set to true when deploying this module in AWS GOV
+ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
+hybrid_connection | false | Sign of readiness for TGW connection
+iam_role_1 | null | IAM Role used to access bootstrap bucket. (If iam_role_2 is not set, this will used for all NGFW instances)
+iam_role_2 | null | IAM Role used to access bootstrap bucket. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
+insane_mode | false | Set to true to enable insane mode encryption
+inspection_enabled | true | Enable/disable east/west + north/south inspection via NGFW.
+instance_size | c5.xlarge | Size of the transit gateway instances
+keep_alive_via_lan_interface_enabled | false | Enable Keep Alive via Firewall LAN Interface
+learned_cidr_approval | false | Switch to true to enable learned CIDR approval
+learned_cidrs_approval_mode | | Learned cidrs approval mode. Defaults to Gateway. Valid values: gateway, connection
+local_as_number | | Changes the Aviatrix Transit Gateway ASN number before you setup Aviatrix Transit Gateway connection configurations.
+name | avx-\<region\>-firenet | Provide a custom name for VPC and Gateway resources. Result will be avx-\<name\>-firenet.
+prefix | true | Boolean to enable prefix name with avx-
+single_az_ha | true | Set to false if Controller managed Gateway HA is desired
+single_ip_snat | false | Enable single_ip mode Source NAT for this gateway
+suffix | true | Boolean to enable suffix name with -firenet
+tags | null | Map of tags to assign to the gateway.
+tunnel_detection_time | null | The IPsec tunnel down detection time for the Spoke Gateway in seconds. Must be a number in the range [20-600]. Default is 60.
+use_gwlb | false | Use AWS GWLB (Only supported with Palo Alto NGFW)
 user_data_1 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (If user_data_2 is not set, this will used for all NGFW instances)
 user_data_2 | | User data for bootstrapping Fortigate and Checkpoint firewalls. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
-east_west_inspection_excluded_cidrs | | Network List Excluded From East-West Inspection.
-china | false | Set to true if deploying this module in AWS/Azure China.
 
 ### Outputs
 This module will return the following objects:
