@@ -6,6 +6,7 @@ This module deploys a VPC, Aviatrix transit gateways and firewall instances.
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
+v5.0.1 | 0.13 - 1.x | >=6.6 | >=2.21.0-6.6.ga
 v5.0.0 | 0.13 - 1.x | >=6.5 | >=0.2.20.3
 v4.0.3 | 0.13 + 0.14 | >=6.4 | >=0.2.19.2
 v4.0.2 | 0.13 + 0.14 | >=6.4 | >=0.2.19
@@ -25,7 +26,7 @@ with ha_gw set to false, the following will be deployed:
 ```
 module "transit_firenet_1" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
-  version = "5.0.0"
+  version = "5.0.1"
   
   cidr = "10.1.0.0/20"
   region = "eu-west-1"
@@ -65,7 +66,6 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
-active_mesh | true | Set to false to disable Active Mesh mode for the transit gateway
 attached | true | Attach firewall instances to Aviatrix Gateways.
 az1 | "a" | concatenates with region to form az names. e.g. eu-central-1a. Only used for insane mode and AWS GWLB.
 az2 | "b" | concatenates with region to form az names. e.g. eu-central-1b. Only used for insane mode and AWS GWLB. If az1 and az2 are equal. Single AZ mode (deploy everyting in 1 AZ) is triggered.
