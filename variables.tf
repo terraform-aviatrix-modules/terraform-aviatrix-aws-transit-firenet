@@ -168,12 +168,6 @@ variable "learned_cidr_approval" {
   default     = "false"
 }
 
-variable "active_mesh" {
-  description = "Set to false to disable active mesh."
-  type        = bool
-  default     = true
-}
-
 variable "enable_segmentation" {
   description = "Switch to true to enable transit segmentation"
   type        = bool
