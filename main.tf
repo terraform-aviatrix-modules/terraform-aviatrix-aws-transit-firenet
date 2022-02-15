@@ -103,7 +103,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
 
 #FQDN Egress filtering instances
 resource "aviatrix_gateway" "egress_instance" {
-  count         = var.ha_gw ? 0 : (local.is_aviatrix ? (var.deploy_firenet ? 1 : 0) : 0) #If ha is false, and is_aviatrix is true, deploy 1
+  count        = var.ha_gw ? 0 : (local.is_aviatrix ? (var.deploy_firenet ? 1 : 0) : 0) #If ha is false, and is_aviatrix is true, deploy 1
   cloud_type   = 1
   account_name = var.account
   gw_name      = "${local.name}-egress-gw"
@@ -116,7 +116,7 @@ resource "aviatrix_gateway" "egress_instance" {
 }
 
 resource "aviatrix_gateway" "egress_instance_1" {
-  count         = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
+  count        = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
   cloud_type   = 1
   account_name = var.account
   gw_name      = "${local.name}-az1-egress-gw${count.index + 1}"
@@ -129,7 +129,7 @@ resource "aviatrix_gateway" "egress_instance_1" {
 }
 
 resource "aviatrix_gateway" "egress_instance_2" {
-  count         = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
+  count        = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
   cloud_type   = 1
   account_name = var.account
   gw_name      = "${local.name}-az2-egress-gw${count.index + 1}"
