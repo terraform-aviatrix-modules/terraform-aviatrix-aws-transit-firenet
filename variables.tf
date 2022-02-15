@@ -306,6 +306,12 @@ variable "china" {
   default     = false
 }
 
+variable "deploy_firenet" {
+  description = "Set to false to fully deploy the Transit Firenet, but without the actual NGFW instances."
+  type        = bool
+  default     = true
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""

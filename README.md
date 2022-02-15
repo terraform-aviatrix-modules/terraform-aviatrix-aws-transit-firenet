@@ -75,6 +75,7 @@ bootstrap_bucket_name_1 | null | Name of bootstrap bucket to pull firewall confi
 bootstrap_bucket_name_2 | null | Name of bootstrap bucket to pull firewall config from. (Only used if 2 or more FW instances are deployed, e.g. when ha_gw is true. Applies to "even" fw instances (2,4,6 etc))
 china | false | Set to true if deploying this module in AWS/Azure China.
 connected_transit | true | Allows spokes to run traffic to other spokes via transit gateway
+deploy_firenet | true | Set to false to only deploy the Transit, but without the actual NGFW instances and Firenet settings (e.g. if you want to deploy that later or manually).
 customer_managed_keys | null | Customer managed key ID for EBS Volume encryption.
 east_west_inspection_excluded_cidrs | | Network List Excluded From East-West Inspection.
 egress_enabled | false | Enable/disable internet egress via NGFW.
