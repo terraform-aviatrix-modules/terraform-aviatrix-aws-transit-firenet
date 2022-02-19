@@ -312,6 +312,12 @@ variable "deploy_firenet" {
   default     = true
 }
 
+variable "custom_fw_names" {
+  description = "If set, the NGFW instances will be deployed with these names. First half of the list for instances in az1, second half for az2."
+  type        = list(string)
+  default     = []
+}
+
 locals {
   lower_name              = length(var.name) > 0 ? replace(lower(var.name), " ", "-") : replace(lower(var.region), " ", "-")
   prefix                  = var.prefix ? "avx-" : ""
@@ -333,4 +339,5 @@ locals {
   user_data_2             = length(var.user_data_2) > 0 ? var.user_data_2 : var.user_data_1                                     #If user data 2 name is not provided, fallback to user data 1.
   single_az_mode          = var.az1 == var.az2 ? true : false                                                                   #Single AZ mode is not related in HA. It is meant for corner case scenario's where customers want to deploy the entire firenet in 1 AZ for traffic cost saving.
   cloud_type              = var.china ? 1024 : (var.gov ? 256 : 1)
+  use_custom_fw_names     = length(var.custom_fw_names) > 0
 }

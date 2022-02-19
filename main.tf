@@ -49,7 +49,7 @@ resource "aviatrix_transit_gateway" "default" {
 #Firewall instances
 resource "aviatrix_firewall_instance" "firewall_instance" {
   count                  = var.ha_gw ? 0 : (local.is_aviatrix ? 0 : (var.deploy_firenet ? 1 : 0)) #If ha is false, and is_aviatrix is false, deploy 1
-  firewall_name          = "${local.name}-fw"
+  firewall_name          = local.use_custom_fw_names ? var.custom_fw_names[count.index] : "${local.name}-fw"
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
@@ -67,7 +67,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
   count                  = var.ha_gw ? (local.is_aviatrix ? 0 : (var.deploy_firenet ? var.fw_amount / 2 : 0)) : 0 #If ha is true, and is_aviatrix is false, deploy var.fw_amount / 2
-  firewall_name          = "${local.name}-az1-fw${count.index + 1}"
+  firewall_name          = local.use_custom_fw_names ? var.custom_fw_names[count.index] : "${local.name}-az1-fw${count.index + 1}"
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
@@ -85,7 +85,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
   count                  = var.ha_gw ? (local.is_aviatrix ? 0 : (var.deploy_firenet ? var.fw_amount / 2 : 0)) : 0 #If ha is true, and is_aviatrix is false, deploy var.fw_amount / 2
-  firewall_name          = "${local.name}-az2-fw${count.index + 1}"
+  firewall_name          = local.use_custom_fw_names ? var.custom_fw_names[length(var.custom_fw_names) / 2 + count.index] : "${local.name}-az2-fw${count.index + 1}"
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
@@ -106,7 +106,7 @@ resource "aviatrix_gateway" "egress_instance" {
   count        = var.ha_gw ? 0 : (local.is_aviatrix ? (var.deploy_firenet ? 1 : 0) : 0) #If ha is false, and is_aviatrix is true, deploy 1
   cloud_type   = 1
   account_name = var.account
-  gw_name      = "${local.name}-egress-gw"
+  gw_name      = local.use_custom_fw_names ? var.custom_fw_names[count.index] : "${local.name}-egress-gw"
   vpc_id       = aviatrix_vpc.default.vpc_id
   vpc_reg      = var.region
   gw_size      = var.fw_instance_size
@@ -119,7 +119,7 @@ resource "aviatrix_gateway" "egress_instance_1" {
   count        = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
   cloud_type   = 1
   account_name = var.account
-  gw_name      = "${local.name}-az1-egress-gw${count.index + 1}"
+  gw_name      = local.use_custom_fw_names ? var.custom_fw_names[count.index] : "${local.name}-az1-egress-gw${count.index + 1}"
   vpc_id       = aviatrix_vpc.default.vpc_id
   vpc_reg      = var.region
   gw_size      = var.fw_instance_size
@@ -132,7 +132,7 @@ resource "aviatrix_gateway" "egress_instance_2" {
   count        = var.ha_gw ? (local.is_aviatrix ? (var.deploy_firenet ? var.fw_amount / 2 : 0) : 0) : 0 #If ha is true, and is_aviatrix is true, deploy var.fw_amount / 2
   cloud_type   = 1
   account_name = var.account
-  gw_name      = "${local.name}-az2-egress-gw${count.index + 1}"
+  gw_name      = local.use_custom_fw_names ? var.custom_fw_names[length(var.custom_fw_names) / 2 + count.index] : "${local.name}-az2-egress-gw${count.index + 1}"
   vpc_id       = aviatrix_vpc.default.vpc_id
   vpc_reg      = var.region
   gw_size      = var.fw_instance_size
